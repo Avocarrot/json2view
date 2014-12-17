@@ -210,9 +210,6 @@ public class DynamicProperty {
     public int getValueInt() {
         return Integer.class.cast(value);
     }
-    public int getValueDimen() {
-        return Integer.class.cast(value);
-    }
     public float getValueFloat() {
         return Float.class.cast(value);
     }

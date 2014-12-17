@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             fIn = context.getResources().getAssets().open(fileName);
             isr = new InputStreamReader(fIn);
             input = new BufferedReader(isr);
-            String line = "";
+            String line;
             while ((line = input.readLine()) != null) {
                 returnString.append(line);
             }
