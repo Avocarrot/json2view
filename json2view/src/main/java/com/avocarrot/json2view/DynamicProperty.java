@@ -8,14 +8,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 import android.view.ViewGroup;
 
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.lang.ref.WeakReference;
 
 /**
  * Created by avocarrot on 11/12/2014.
@@ -179,8 +177,6 @@ public class DynamicProperty {
      * @return search in clazz of possible variable name (varName) and return its value
      */
     public Object getValueInt(Class clazz, String varName) {
-        if (this==null)
-            return null;
 
         java.lang.reflect.Field fieldRequested = null;
 
