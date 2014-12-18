@@ -130,9 +130,13 @@ public class DynamicProperty {
                 return Color.parseColor(v);
             }
             case BOOLEAN: {
-                if (v.equalsIgnoreCase("true")) {
+                if (v.equalsIgnoreCase("t")) {
                     return true;
+                } else if (v.equalsIgnoreCase("f")) {
+                    return false;
                 } else if (v.equalsIgnoreCase("true")) {
+                    return true;
+                } else if (v.equalsIgnoreCase("false")) {
                     return false;
                 }
                 return Integer.parseInt(v) == 1;
