@@ -1,0 +1,248 @@
+{
+	"widget": "android.widget.RelativeLayout",
+	"properties": [{
+		"name": "background",
+		"type": "color",
+		"value": "#919191"
+	},
+	{
+		"name": "layout_width",
+		"type": "dimen",
+		"value": "match_parent"
+	},
+	{
+		"name": "layout_height",
+		"type": "dimen",
+		"value": "match_parent"
+	},
+	{
+		"name": "padding",
+		"type": "dimen",
+		"value": "10dp"
+	}],
+	"views": [{
+		"widget": "android.widget.LinearLayout",
+		"properties": [{
+			"name": "layout_width",
+			"type": "dimen",
+			"value": "90%"
+		},
+		{
+			"name": "layout_height",
+			"type": "dimen",
+			"value": "wrap_content"
+		},
+		{
+			"name": "background",
+			"type": "color",
+			"value": "#ffffff"
+		},
+		{
+			"name": "layout_centerInParent",
+			"type": "boolean",
+			"value": "true"
+		},
+		{
+			"name": "orientation",
+			"type": "string",
+			"value": "vertical"
+		}],
+		"views": [{
+			"widget": "android.widget.TextView",
+			"properties": [{
+				"name": "id",
+				"type": "",
+				"value": "adClose"
+			},
+			{
+				"name": "layout_width",
+				"type": "dimen",
+				"value": "match_parent"
+			},
+			{
+				"name": "layout_height",
+				"type": "dimen",
+				"value": "wrap_content"
+			},
+			{
+				"name": "background",
+				"type": "color",
+				"value": "#ffffff"
+			},
+			{
+				"name": "gravity",
+				"type": "string",
+				"value": "center"
+			},
+			{
+				"name": "text",
+				"type": "string",
+				"value": "I am not interested"
+			},
+			{
+				"name": "gravity",
+				"type": "",
+				"value": "center"
+			},
+            {
+                "name": "padding",
+                "type": "dimen",
+                "value": "5dp"
+            },
+			{
+				"name": "textColor",
+				"type": "color",
+				"value": "#919191"
+			}]
+		},
+		{
+			"widget": "android.widget.TextView",
+			"properties": [{
+				"name": "id",
+				"type": "",
+				"value": "adTitle"
+			},
+			{
+				"name": "layout_width",
+				"type": "dimen",
+				"value": "wrap_content"
+			},
+			{
+				"name": "layout_height",
+				"type": "dimen",
+				"value": "wrap_content"
+			},
+			{
+				"name": "background",
+				"type": "color",
+				"value": "#ffffff"
+			},
+			{
+				"name": "text",
+				"type": "string",
+				"value": "Hello AVOCARROT!"
+			},
+			{
+				"name": "layout_gravity",
+				"type": "string",
+				"value": "center"
+			},
+			{
+				"name": "textSize",
+				"type": "dimen",
+				"value": "16sp"
+			},
+		    {
+				"name": "drawableLeft",
+				"type": "base64",
+				"value": "iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAAJLklEQVRYhb1YS09d1xX+9us8LvdezCOAgwuBmGCgxZDg4MimTuzKbmZV1WEzi9R/kP6CDjppBx30L3hQyYPESeXYNRJGjo0fwXYbJ4RAhFMRMNyYxz2v/ehg1UdXpBBfFHcPYOvcffb+1lrf+tbahznn8MxDAwlggLIG6D1mteQaloMbOAGWGKcEg0NgAAACYM9+AngdawEGSEABTgIC4ADj9F/rVIEJoCCYABSDs/VBoSHrWi0AARggARyHMpAMzMIDh3ZSwppMJ6kXhICBTSEUmKzLbFZXyOAABzCkTGtnFeNCM+4EGB1qkcXgDtaBaUgJxsG8usyuL2QAYAALT+uCyxQSLjVgwABtYQ1MFdXKk6lLmP8CiB0z9W5fX8jAoAHpgLiKqILGBkgFVYYTTmfMZNiqLH70wVf/fNDY1fVa3+9Sx30RPkdABsgEpLNY+GrjX7cLrUX505+hXWlmpW+xto77t5ZmpgMlfQ5AKVGsNwh1egjIOMJMr81/fvfK5bbm8rAn0FiUQRHbMR4/uvn3j9oKBdnW8vLp0zCCyfoYjT1WO+e01jueZDrzAPC03Nby4ouH2oX34ML7+Pwe0seofD1z8W9Fx+LEvnz85+jug2wwGsaY/HX6u3ca7QqIMSalNMZora219ERJwZBE8aYaffXw6GtrT5Ii5Bfvf4A7N5f/8eHGo68jx46e+SX6XwV8MAHGhBAAjDH5JgCyLNv13N3wWms55zsmlqWGVX0wVGLIAFOTsx9eaGVbrS2Fikm/jnS599WBX/0WzZ1wMKEwgASz2nDOOefOOQK0Hw/lRhAacrVkQsACQGMLvBJOnvnJ6DGjsfnNypNvH3d0dA784ixeOAih4KmNpOpgHByhod3IfvLW/xy7ktr3fWttlmW0HfGJC8adrEZJIWx6srHZeKDY/OvfNOitR/dnVGOp+7Vx9PZlUELDGBiXOkgHnqWZc87zPAqfcy73+vfHXkqttRZC1DrZmowLCyfiRCof1kHZCJV/V65+1NT5Io4eg9e0jbCghNbgSgOGQXKIfAfnnDFGyl0dsSugNE0ZY0qpNE3n5+fTNA2CINqu+pDgEmG51Nz0QkvB2YzzLY/DbW6z8AASDr+wsLy89uRxc6A21tdlUJDKz7KsWCx2dXUJIeI4DoKgbkBEQGvt5OTk+fPnV1ZWGhsb0zhTlhvHY2c7DnX+6c9/BMe3ZqsoggJcAIbIzn8x94e//mV1fbXMRCkMqsakmUmSZGRk5J133unt7f2+42vH7q5jLEkSzvn6+vra2lpzc7OU0vM8T/pJkkhtuzrbJRDFSUdQTE2shOecY75KuSuHYeKH5UIx00lD2OBrHQTBl19+GQSB1nrvRNtLqYUQUsrR0dGLFy8KIYrF4rvvvquU8n0fQKFQEBzFwAfgicA5Z60TgvUPDf7+vfeyLIuiSEr52WefnT9/Xin1yiuvlEolYo/Wejca7QrIGEME7OrqGhoaun37Njmsr68vz5EoisIwpODmoTfGHDx4EEC1Wi0UCjMzM1tbW83NzW+++WaxWPyvfOxO6l11iHOulIqiSCl19uxZIUQURRcuXKCTqtWqMSYMQwCMMWMM5zwX5TRNoyjyPG9paenKlSthGB44cGBkZIRIuaMiPSsgqkGkRv39/T09PcSDhYWFYrGYiwoVFpqTlgZBIIQIw1BKOT09vbW1VS6Xx8bGSqWSc47ovIfW7FXL0jRVStEu4+Pj1tooij7++OO8AsRxzDnfUT7pubV2bW3tk08+oeicOnUqN1IptYdS7wqIjMZTar/++uttbW3Oubm5ueXlZfpVKUWRpZWe5+UTa+3s7Gwcx1mW9ff3d3Z24mlwazevAxCdByBJEgCtra1HjhwJw3Bpaen+/fsAoiiifWvNtdbGcUw+uHHjRqVSaWhoePvtt7XWWZYxxsi1uVPrA0Ts832fMu7cuXNUkiYnJ5MkCcNQa+2co6jlFYr8NDc39/DhQ8/zDh8+3NPTI4RQSuXs2Q+HUONYqq9NTU3Dw8Na6/X19Vu3bgGQUhKRaSVZTzS/du0aUW1sbCwIAmttbWu2n7Qn02lOrm5sbJyYmGCMbW1tTU9Px3Gcr8yXEbjl5eWZmRlrbVtb27FjYwAIEBm2B6P3AkSv1codgMHBwUOHDjHGFhcXl5aWqG7XEiKOYyHEnTt3tre3AYyNjR040EShJPNIivYDiMzNXyaKFAqFN954wzm3sbFx8+ZNzjljjIymDAqC4LvvKtevXxdClEolWpymqRBihyPrBrSjgRJCEMePHz9eLpezLJuZmdnY2CCNpjW04NNPZxcXFznnAwMD3d3dxphcwVHTENcNqNYaYwxNnHMdHR1jY2NCiNXV1ampqR27a62vX7+epmlDQwOJITVVeOrsfKu6AdVmZq2aOedOnDhBpePq1auc8yzLaDFxa35+XinV0tJy9OjRJEl2CM8Pfkr4AQ6RA0haqAwxxl566aUjR44451ZWVm7cuEG8ppMuX75crVallOfOnTPGkJTTu7RJruZ1A9ptbG5u+r5/4sQJwnHt2rU8KKurq7Ozs57ntba29vX1CSH2TqgfBxCZODIy0traaox5+PDhwsICZdmdO3eWl5cBjI6OdnR01CrZcwTk+34URcVicXx8nIrG5OSkEGJzc3NqaqpUKpH/AFBD99wB0XDOTUxMNDU1pWl67969KIoePHjw6NEj59zg4GBvb+8el+UfGVCWZWEYpmna3t4+PDycpmmlUrl06RKJYZIkb731FgDOObXe9Y66P8dQXaScOnny5N27d6lr01p7ntfd3U0JmGvED17md4z9hExrTd30wMBAZ2enlLJSqWxvb6dpeurUKWI9qXa9aPYDiD7TOOfo2n/mzJnNzc1yuSyEaG9vP378+PfF8PkCyk0nnezr6xsaGnr8+PHGxsbw8HBDQwO14VLK/5MOkXtonqZpc3PzyMiI7/vd3d0TExPUZuS+2YeT6iY1nn4VofaeMXb69OlCoVAoFHp6etI09Twv/6SU9//PPur8cA7gaW9Um0d5NmVZRmm4DzrTqDtkVCVIcpxzcRxTqw+AqmntPXAf1tYNKKcFVX66oXLOqS3Mf8rRP3dASqlajaG7uta69hKX/7THhXC38R/7RDCAjCmKfQAAAABJRU5ErkJggg=="
+			},
+            {
+                "name": "padding",
+                "type": "dimen",
+                "value": "5dp"
+            },
+            {
+                "name": "gravity",
+                "type": "string",
+                "value": "center"
+            },
+			{
+				"name": "textColor",
+				"type": "color",
+				"value": "#1f91f7"
+			}]
+		},
+		{
+			"widget": "android.widget.ImageView",
+			"properties": [{
+				"name": "id",
+				"type": "",
+				"value": "adImage"
+			},
+			{
+				"name": "layout_width",
+				"type": "dimen",
+				"value": "wrap_content"
+			},
+			{
+				"name": "layout_height",
+				"type": "dimen",
+				"value": "wrap_content"
+			},
+			{
+				"name": "scaleType",
+				"type": "dimen",
+				"value": "fit_Center"
+			},
+			{
+				"name": "adjustViewBounds",
+				"type": "boolean",
+				"value": "true"
+			},
+		    {
+				"name": "src",
+				"type": "ref",
+				"value": "sample"
+			},
+			{
+				"name": "background",
+				"type": "color",
+				"value": "#228877"
+			}]
+		},
+		{
+			"widget": "android.widget.TextView",
+			"properties": [{
+				"name": "id",
+				"type": "",
+				"value": "adCTA"
+			},
+			{
+				"name": "layout_width",
+				"type": "dimen",
+				"value": "match_parent"
+			},
+			{
+				"name": "layout_height",
+				"type": "dimen",
+				"value": "wrap_content"
+			},
+			{
+				"name": "background",
+				"type": "color",
+				"value": "#ffffff"
+			},
+			{
+				"name": "text",
+				"type": "string",
+				"value": "LearnMore"
+			},
+			{
+				"name": "padding",
+				"type": "dimen",
+				"value": "5dp"
+			},
+			{
+				"name": "textSize",
+				"type": "dimen",
+				"value": "16sp"
+			},
+            {
+                "name": "padding",
+                "type": "dimen",
+                "value": "7.5dp"
+            },
+            {
+                "name": "gravity",
+                "type": "string",
+                "value": "center"
+            },
+			{
+				"name": "textColor",
+				"type": "color",
+				"value": "#1f91f7"
+			}]
+		}]
+	}]
+}
