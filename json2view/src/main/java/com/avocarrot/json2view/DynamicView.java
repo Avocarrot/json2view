@@ -33,7 +33,8 @@ public class DynamicView {
 
         View container = createViewInternal(context, jsonObject, ids);
 
-        DynamicHelper.applyLayoutProperties(container, (List<DynamicProperty>) container.getTag(), null, ids);
+        if (container.getTag() != null)
+            DynamicHelper.applyLayoutProperties(container, (List<DynamicProperty>) container.getTag(), null, ids);
 
         /* clear tag from properties */
         container.setTag(null);
