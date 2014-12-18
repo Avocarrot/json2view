@@ -404,7 +404,7 @@ public class DynamicHelper {
         if (view instanceof TextView) {
             switch (property.type) {
                 case DIMEN: {
-                    ((TextView) view).setTextSize(property.getValueFloat());
+                    ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, property.getValueFloat());
                 }
                 break;
             }
@@ -567,23 +567,38 @@ public class DynamicHelper {
     /**
      * convert densityPixel to pixel
      */
-    public static int dpToPx(float dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
+    public static float dpToPx(float dp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
 //        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
     /**
      * convert scalePixel to pixel
      */
-    public static int spToPx(float sp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, Resources.getSystem().getDisplayMetrics());
+    public static float spToPx(float sp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, Resources.getSystem().getDisplayMetrics());
     }
 
     /**
      * convert pixel to densityPixel
      */
-    public static int pxToDp(int px) {
-        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
+    public static float pxToDp(int px) {
+        return (px / Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    /**
+     * convert pixel to scaledDensityPixel
+     */
+    public static float pxToSp(int px) {
+        return (px / Resources.getSystem().getDisplayMetrics().scaledDensity);
+//        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, px, Resources.getSystem().getDisplayMetrics());
+    }
+
+    /**
+     * convert densityPixel to scaledDensityPixel
+     */
+    public static float dpToSp(float dp) {
+        return (int) ( dpToPx(dp) / Resources.getSystem().getDisplayMetrics().scaledDensity);
     }
 
     /**

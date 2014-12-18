@@ -111,7 +111,7 @@ public class DynamicProperty {
                 if (v.endsWith("dp"))
                     return DynamicHelper.dpToPx(Float.parseFloat(v.replaceAll("dp", "")));
                 else if (v.endsWith("sp"))
-                    return Float.parseFloat(v.replaceAll("sp", ""));
+                    return DynamicHelper.spToPx(Float.parseFloat(v.replaceAll("sp", "")));
                 else if (v.endsWith("px"))
                     return Integer.parseInt(v.replaceAll("px", ""));
                 else if (v.endsWith("%"))
@@ -216,7 +216,12 @@ public class DynamicProperty {
         return String.class.cast(value);
     }
     public int getValueInt() {
-        return Integer.class.cast(value);
+        if (value instanceof Integer)
+            return Integer.class.cast(value);
+        else if (value instanceof Float)
+            return (int) getValueFloat();
+        else
+            return (int) value;
     }
     public float getValueFloat() {
         return Float.class.cast(value);
