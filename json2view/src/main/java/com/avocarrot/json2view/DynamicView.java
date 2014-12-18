@@ -29,9 +29,15 @@ public class DynamicView {
      */
     public static View createView (Context context, JSONObject jsonObject, Class holderClass) {
 
+        if (jsonObject==null)
+            return null;
+
         HashMap<String, Integer> ids = new HashMap<>();
 
         View container = createViewInternal(context, jsonObject, ids);
+
+        if (container==null)
+            return null;
 
         if (container.getTag() != null)
             DynamicHelper.applyLayoutProperties(container, (List<DynamicProperty>) container.getTag(), null, ids);

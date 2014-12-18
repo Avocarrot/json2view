@@ -39,8 +39,8 @@
 		},
 		{
 			"name": "layout_centerInParent",
-			"type": "",
-			"value": ""
+			"type": "boolean",
+			"value": "true"
 		},
 		{
 			"name": "orientation",
