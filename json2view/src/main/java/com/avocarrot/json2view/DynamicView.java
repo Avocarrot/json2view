@@ -116,7 +116,9 @@ public class DynamicView {
             JSONArray jArray = jsonObject.getJSONArray("properties");
             if (jArray != null) {
                 for (int i=0;i<jArray.length();i++){
-                    properties.add(new DynamicProperty(jArray.getJSONObject(i)));
+                    DynamicProperty p = new DynamicProperty(jArray.getJSONObject(i));
+                    if (p.isValid())
+                        properties.add(p);
                 }
             }
 

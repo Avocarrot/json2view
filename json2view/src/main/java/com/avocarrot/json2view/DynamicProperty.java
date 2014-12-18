@@ -171,6 +171,10 @@ public class DynamicProperty {
         } catch (Exception e) {}
     }
 
+    public boolean isValid() {
+        return value!=null;
+    }
+
     /**
      * @param clazz
      * @param varName
