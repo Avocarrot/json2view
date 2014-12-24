@@ -6,14 +6,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.ViewGroup;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Arrays;
 
 /**
  * Created by avocarrot on 11/12/2014.
@@ -32,7 +35,8 @@ public class DynamicProperty {
         COLOR,
         REF,
         BOOLEAN,
-        BASE64
+        BASE64,
+        DRAWABLE
     }
 
     /**
@@ -108,26 +112,10 @@ public class DynamicProperty {
                 return Integer.parseInt(v);
             }
             case DIMEN: {
-                if (v.endsWith("dp"))
-                    return DynamicHelper.dpToPx(Float.parseFloat(v.replaceAll("dp", "")));
-                else if (v.endsWith("sp"))
-                    return DynamicHelper.spToPx(Float.parseFloat(v.replaceAll("sp", "")));
-                else if (v.endsWith("px"))
-                    return Integer.parseInt(v.replaceAll("px", ""));
-                else if (v.endsWith("%"))
-                    return (int)(Float.parseFloat(v.replaceAll("%", ""))/100f * DynamicHelper.deviceWidth());
-                else if (v.equalsIgnoreCase("match_parent"))
-                    return ViewGroup.LayoutParams.MATCH_PARENT;
-                else if (v.equalsIgnoreCase("wrap_content"))
-                    return ViewGroup.LayoutParams.WRAP_CONTENT;
-                else
-                    return Integer.parseInt(v);
+                return  convertDimenToPixel(v);
             }
             case COLOR: {
-                if (v.startsWith("0x")) {
-                    return (int) Long.parseLong(v.substring(2), 16);
-                }
-                return Color.parseColor(v);
+                return convertColor(v);
             }
             case BOOLEAN: {
                 if (v.equalsIgnoreCase("t")) {
@@ -149,6 +137,60 @@ public class DynamicProperty {
                 catch (Exception e) {
                     return null;
                 }
+            }
+            case DRAWABLE: {
+                JSONObject drawableProperties = null;
+                try {
+                    drawableProperties = new JSONObject(v);
+                } catch (Exception e) {};
+
+                GradientDrawable gd = new GradientDrawable();
+
+                if (drawableProperties!=null) {
+
+                    try { gd.setColor ( convertColor( drawableProperties.getString("COLOR") ) ); } catch (JSONException e) {}
+                    if (drawableProperties.has("CORNER")) {
+                        String cornerValues = null;
+                        try {
+                            cornerValues = drawableProperties.getString("CORNER");
+                        } catch (JSONException e){}
+                        if (!TextUtils.isEmpty(cornerValues)) {
+                            if (cornerValues.contains("|")) {
+                                float[] corners = new float[8];
+                                Arrays.fill(corners, 0);
+                                String[] values = cornerValues.split("\\|");
+                                int count = Math.min(values.length, corners.length);
+                                for (int i=0 ; i<count ; i++) {
+                                    try {
+                                        corners[i] = convertDimenToPixel(values[i]);
+                                    } catch (Exception e) {
+                                        corners[i] = 0f;
+                                    }
+                                }
+                                gd.setCornerRadii(corners);
+                            } else {
+                                try {
+                                    gd.setCornerRadius( convertDimenToPixel(cornerValues) );
+                                } catch (Exception e) {
+                                    gd.setCornerRadius(0f);
+                                }
+                            }
+                        }
+
+                    }
+                    int strokeColor = 0x00FFFFFF;
+                    int strokeSize = 0;
+                    if (drawableProperties.has("STROKECOLOR")) {
+                        try { strokeColor = convertColor( drawableProperties.getString("STROKECOLOR") ); } catch (JSONException e) {}
+                    }
+                    if (drawableProperties.has("STROKESIZE")) {
+                        try { strokeSize = (int) convertDimenToPixel( drawableProperties.getString("STROKESIZE") ); } catch (JSONException e) {}
+                    }
+                    gd.setStroke(strokeSize, strokeColor);
+
+                }
+
+                return gd;
             }
         }
         return v;
@@ -232,8 +274,36 @@ public class DynamicProperty {
     public Bitmap getValueBitmap() {
         return (Bitmap)value;
     }
-    public Drawable getValueDrawable() {
+    public Drawable getValueBitmapDrawable() {
         return new BitmapDrawable(Resources.getSystem(), getValueBitmap());
+    }
+    public Drawable getValueGradientDrawable() {
+        return (Drawable)value;
+    }
+
+
+    int convertColor(String color) {
+        if (color.startsWith("0x")) {
+            return (int) Long.parseLong(color.substring(2), 16);
+        }
+        return Color.parseColor(color);
+    }
+
+    float convertDimenToPixel(String dimen) {
+        if (dimen.endsWith("dp"))
+            return DynamicHelper.dpToPx(Float.parseFloat(dimen.replaceAll("dp", "")));
+        else if (dimen.endsWith("sp"))
+            return DynamicHelper.spToPx(Float.parseFloat(dimen.replaceAll("sp", "")));
+        else if (dimen.endsWith("px"))
+            return Integer.parseInt(dimen.replaceAll("px", ""));
+        else if (dimen.endsWith("%"))
+            return (int)(Float.parseFloat(dimen.replaceAll("%", ""))/100f * DynamicHelper.deviceWidth());
+        else if (dimen.equalsIgnoreCase("match_parent"))
+            return ViewGroup.LayoutParams.MATCH_PARENT;
+        else if (dimen.equalsIgnoreCase("wrap_content"))
+            return ViewGroup.LayoutParams.WRAP_CONTENT;
+        else
+            return Integer.parseInt(dimen);
     }
 
 }
