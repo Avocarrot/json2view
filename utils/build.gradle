@@ -1,0 +1,34 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    compile project(':json2view')
+    compile 'org.codehaus.groovy:groovy-all:2.1.6'
+//    compile files('json2view/build/intermediates/classes/debug/com/avocarrot/json2view')
+}
+
+//buildscript {
+//    dependencies {
+//        classpath files(['../../json2view/build/intermediates/classes/debug/com/avocarrot/json2view/'])
+//    }
+//}
+
+task runScript(dependsOn: 'classes', type: JavaExec) {
+    description 'Run Groovy script'
+
+    // Set main property to name of Groovy script class.
+    main = 'ConvertXML2Json'
+
+    // Set classpath for running the Groovy script.
+    classpath = sourceSets.main.runtimeClasspath
+
+    if (project.hasProperty('custom')) {
+        // Pass command-line argument to script.
+        args project.getProperty('custom')
+    }
+}
+
+defaultTasks 'runScript'
