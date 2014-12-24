@@ -315,9 +315,16 @@ public class DynamicHelper {
                 break;
                 case BASE64: {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN)
-                        view.setBackground(property.getValueDrawable());
+                        view.setBackground(property.getValueBitmapDrawable());
                     else
-                        view.setBackgroundDrawable(property.getValueDrawable());
+                        view.setBackgroundDrawable(property.getValueBitmapDrawable());
+                }
+                break;
+                case DRAWABLE: {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN)
+                        view.setBackground(property.getValueGradientDrawable());
+                    else
+                        view.setBackgroundDrawable(property.getValueGradientDrawable());
                 }
                 break;
             }
@@ -459,7 +466,6 @@ public class DynamicHelper {
         if (view instanceof TextView) {
             TextView textView = (TextView) view;
             Drawable[] d = textView.getCompoundDrawables();
-            d[position] = property.getValueDrawable();
             switch (property.type) {
                 case REF: {
                     try {
@@ -468,7 +474,11 @@ public class DynamicHelper {
                 }
                 break;
                 case BASE64: {
-                    d[position] = property.getValueDrawable();
+                    d[position] = property.getValueBitmapDrawable();
+                }
+                break;
+                case DRAWABLE: {
+                    d[position] = property.getValueGradientDrawable();
                 }
                 break;
             }
