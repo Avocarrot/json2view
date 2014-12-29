@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -132,18 +133,7 @@ public class DynamicHelper {
     public static void applyLayoutProperties(View view, List<DynamicProperty> properties, ViewGroup viewGroup, HashMap<String, Integer> ids) {
         if (viewGroup == null)
             return;
-        ViewGroup.LayoutParams params = null;
-        try {
-            /* find parent viewGroup and create LayoutParams of that class */
-            String layoutParamsClassname = viewGroup.getClass().getName() + "$LayoutParams";
-            Class layoutParamsClass = Class.forName(layoutParamsClassname);
-            /* create the actual layoutParams object */
-            params = (ViewGroup.LayoutParams) layoutParamsClass.getConstructor(Integer.TYPE, Integer.TYPE).newInstance(new Object[]{ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT});
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (params == null)
-            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams params = createLayoutParams(viewGroup);
 
         for (DynamicProperty dynProp : properties) {
             try {
@@ -154,6 +144,37 @@ public class DynamicHelper {
                     break;
                     case LAYOUT_WIDTH: {
                         params.width = dynProp.getValueInt();
+                    }
+                    break;
+                    case LAYOUT_MARGIN: {
+                        if (params instanceof ViewGroup.MarginLayoutParams) {
+                            ViewGroup.MarginLayoutParams p = ((ViewGroup.MarginLayoutParams) params);
+                            p.bottomMargin = p.topMargin = p.leftMargin = p.rightMargin = dynProp.getValueInt();
+                        }
+                    }
+                    break;
+                    case LAYOUT_MARGINLEFT: {
+                        if (params instanceof ViewGroup.MarginLayoutParams) {
+                            ((ViewGroup.MarginLayoutParams) params).leftMargin = dynProp.getValueInt();
+                        }
+                    }
+                    break;
+                    case LAYOUT_MARGINTOP: {
+                        if (params instanceof ViewGroup.MarginLayoutParams) {
+                            ((ViewGroup.MarginLayoutParams) params).topMargin = dynProp.getValueInt();
+                        }
+                    }
+                    break;
+                    case LAYOUT_MARGINRIGHT: {
+                        if (params instanceof ViewGroup.MarginLayoutParams) {
+                            ((ViewGroup.MarginLayoutParams) params).rightMargin = dynProp.getValueInt();
+                        }
+                    }
+                    break;
+                    case LAYOUT_MARGINBOTTOM: {
+                        if (params instanceof ViewGroup.MarginLayoutParams) {
+                            ((ViewGroup.MarginLayoutParams) params).bottomMargin = dynProp.getValueInt();
+                        }
                     }
                     break;
                     case LAYOUT_ABOVE: {
@@ -292,6 +313,26 @@ public class DynamicHelper {
         }
 
         view.setLayoutParams(params);
+    }
+
+    public static ViewGroup.LayoutParams createLayoutParams(ViewGroup viewGroup) {
+        ViewGroup.LayoutParams params = null;
+        try {
+            /* find parent viewGroup and create LayoutParams of that class */
+            String layoutParamsClassname = viewGroup.getClass().getName() + "$LayoutParams";
+            if (viewGroup instanceof AbsListView) {
+                layoutParamsClassname = AbsListView.LayoutParams.class.getName();
+            }
+            Class layoutParamsClass = Class.forName(layoutParamsClassname);
+            /* create the actual layoutParams object */
+            params = (ViewGroup.LayoutParams) layoutParamsClass.getConstructor(Integer.TYPE, Integer.TYPE).newInstance(new Object[]{ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (params == null)
+            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        return params;
     }
 
     /*** View Properties ***/
