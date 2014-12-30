@@ -52,6 +52,11 @@ public class DynamicProperty {
         PADDING_TOP,
         PADDING_BOTTOM,
         PADDING,
+        LAYOUT_MARGINLEFT,
+        LAYOUT_MARGINRIGHT,
+        LAYOUT_MARGINTOP,
+        LAYOUT_MARGINBOTTOM,
+        LAYOUT_MARGIN,
         BACKGROUND,
         /* textView */
         TEXT,

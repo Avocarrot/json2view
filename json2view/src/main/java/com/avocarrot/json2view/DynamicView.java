@@ -28,19 +28,29 @@ public class DynamicView {
      * @return the view that created
      */
     public static View createView (Context context, JSONObject jsonObject, Class holderClass) {
+        return createView(context, jsonObject, null, holderClass);
+    }
+
+    /**
+     * @param jsonObject : json object
+     * @param parent : parent viewGroup
+     * @param holderClass : class that will be created as an holder and attached as a tag in the View
+     * @return the view that created
+     */
+    public static View createView (Context context, JSONObject jsonObject, ViewGroup parent, Class holderClass) {
 
         if (jsonObject==null)
             return null;
 
         HashMap<String, Integer> ids = new HashMap<>();
 
-        View container = createViewInternal(context, jsonObject, ids);
+        View container = createViewInternal(context, jsonObject, parent, ids);
 
         if (container==null)
             return null;
 
         if (container.getTag() != null)
-            DynamicHelper.applyLayoutProperties(container, (List<DynamicProperty>) container.getTag(), null, ids);
+            DynamicHelper.applyLayoutProperties(container, (List<DynamicProperty>) container.getTag(), parent, ids);
 
         /* clear tag from properties */
         container.setTag(null);
@@ -69,10 +79,19 @@ public class DynamicView {
 
     /**
      * @param jsonObject : json object
+     * @param parent : parent viewGroup
+     * @return the view that created
+     */
+    public static View createView (Context context, JSONObject jsonObject, ViewGroup parent) {
+        return createView(context, jsonObject, parent, null);
+    }
+
+    /**
+     * @param jsonObject : json object
      * @return the view that created
      */
     public static View createView (Context context, JSONObject jsonObject) {
-        return createView(context, jsonObject, null);
+        return createView(context, jsonObject, null, null);
     }
 
     /**
@@ -81,7 +100,7 @@ public class DynamicView {
      * @param ids : the hashMap where we keep ids as string from json to ids as int in the layout
      * @return the view that created
      */
-    private static View createViewInternal (Context context, JSONObject jsonObject, HashMap<String, Integer> ids) {
+    private static View createViewInternal (Context context, JSONObject jsonObject, ViewGroup parent, HashMap<String, Integer> ids) {
 
         View view = null;
 
@@ -115,7 +134,8 @@ public class DynamicView {
         try {
 
             /* default Layout in case the user not set it */
-            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            ViewGroup.LayoutParams params = DynamicHelper.createLayoutParams(parent);
+            view.setLayoutParams(params);
 
             /* iterrate json and get all properties in array */
             properties = new ArrayList<>();
@@ -150,7 +170,7 @@ public class DynamicView {
                     int count=jViews.length();
                     for (int i=0;i<count;i++) {
                         /* create every child add it in viewGroup and set its tag with its properties */
-                        View dynamicChildView = DynamicView.createViewInternal(context, jViews.getJSONObject(i), ids);
+                        View dynamicChildView = DynamicView.createViewInternal(context, jViews.getJSONObject(i), parent, ids);
                         views.add(dynamicChildView);
                         viewGroup.addView(dynamicChildView);
                     }

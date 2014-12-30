@@ -1,17 +1,10 @@
 package com.avocarrot.json2view;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.test.InstrumentationTestCase;
-import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import static com.avocarrot.json2view.DynamicProperty.NAME;
 import static com.avocarrot.json2view.DynamicProperty.TYPE;
