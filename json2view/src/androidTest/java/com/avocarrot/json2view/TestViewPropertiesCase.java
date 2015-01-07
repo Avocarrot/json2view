@@ -126,7 +126,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.TEXT).setType(TYPE.REF).setValue("test_string").build())
                 .build());
-        assertEquals( ((TextView)view).getText(), context.getString(com.avocarrot.json2view.test.R.string.test_string));
+        assertEquals( ((TextView)view).getText(), context.getString(com.avocarrot.json2view.test.R.string.test_string)+"fail");
     }
 
     /* test text size */
