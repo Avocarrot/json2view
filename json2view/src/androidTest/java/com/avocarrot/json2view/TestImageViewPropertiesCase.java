@@ -46,7 +46,7 @@ public class TestImageViewPropertiesCase extends InstrumentationTestCase {
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.SRC).setType(TYPE.REF).setValue("sample").build())
                 .build());
-        assertTrue( ( ((BitmapDrawable)((ImageView)view).getDrawable()).getBitmap() ).sameAs(Utils.readDrawable(R.drawable.sample, context)));
+        assertTrue( ( ((BitmapDrawable)((ImageView)view).getDrawable()).getBitmap() ).sameAs(Utils.readDrawable(com.avocarrot.json2view.test.R.drawable.sample, context)));
         /* load other drawable and check */
         view = DynamicView.createView(
             context,
