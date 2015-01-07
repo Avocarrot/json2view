@@ -2,8 +2,6 @@ package com.avocarrot.json2view;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 
 /**
  * Created by avocarrot on 19/12/2014.
