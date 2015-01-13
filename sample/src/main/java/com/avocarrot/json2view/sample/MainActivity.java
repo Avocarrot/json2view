@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.avocarrot.json2view.DynamicView;
 import com.avocarrot.json2view.DynamicViewId;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -26,12 +25,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         try {
 
             /* create dynamic view and return the view with the holder class attached as tag */
-            View sampleView = DynamicView.createView(this, new JSONObject(readFile("sample.json", this)), SampleViewHolder.class);
+            View sampleView = DynamicView.createView(this, new JSONObject(readFile("interstitial.json", this)), SampleViewHolder.class);
             ((SampleViewHolder)sampleView.getTag()).adClose.setOnClickListener(this);
             sampleView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT));
             setContentView(sampleView);
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -74,7 +73,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
      **/
     static public class SampleViewHolder {
         public SampleViewHolder() {}
-        @DynamicViewId(id = "adClose")
+        @DynamicViewId(id = "avo_close")
         public View adClose;
     }
 
