@@ -36,7 +36,8 @@ public class DynamicProperty {
         REF,
         BOOLEAN,
         BASE64,
-        DRAWABLE
+        DRAWABLE,
+        JSON
     }
 
     /**
@@ -58,6 +59,11 @@ public class DynamicProperty {
         LAYOUT_MARGINBOTTOM,
         LAYOUT_MARGIN,
         BACKGROUND,
+        ENABLED,
+        SELECTED,
+        CLICKABLE,
+        SCALEX,
+        SCALEY,
         /* textView */
         TEXT,
         TEXTCOLOR,
@@ -98,7 +104,9 @@ public class DynamicProperty {
         LAYOUT_TORIGHTOF,
         LAYOUT_TOSTARTOF,
         LAYOUT_GRAVITY,
-        ORIENTATION
+        ORIENTATION,
+
+        FUNCTION
     }
 
     public NAME name;
@@ -109,34 +117,35 @@ public class DynamicProperty {
      * @param v value to convert as string
      * @return Value as object depends on the type
      */
-    private Object convertValue(String v) {
-        if (TextUtils.isEmpty(v))
+    private Object convertValue(Object v) {
+        if (v==null)
             return null;
         switch (type) {
             case INTEGER: {
-                return Integer.parseInt(v);
+                return Integer.parseInt(v.toString());
             }
             case DIMEN: {
-                return  convertDimenToPixel(v);
+                return  convertDimenToPixel(v.toString());
             }
             case COLOR: {
-                return convertColor(v);
+                return convertColor(v.toString());
             }
             case BOOLEAN: {
-                if (v.equalsIgnoreCase("t")) {
+                String value = v.toString();
+                if (value.equalsIgnoreCase("t")) {
                     return true;
-                } else if (v.equalsIgnoreCase("f")) {
+                } else if (value.equalsIgnoreCase("f")) {
                     return false;
-                } else if (v.equalsIgnoreCase("true")) {
+                } else if (value.equalsIgnoreCase("true")) {
                     return true;
-                } else if (v.equalsIgnoreCase("false")) {
+                } else if (value.equalsIgnoreCase("false")) {
                     return false;
                 }
-                return Integer.parseInt(v) == 1;
+                return Integer.parseInt(value) == 1;
             }
             case BASE64: {
                 try {
-                    InputStream stream = new ByteArrayInputStream(Base64.decode(v, Base64.DEFAULT));
+                    InputStream stream = new ByteArrayInputStream(Base64.decode(v.toString(), Base64.DEFAULT));
                     return BitmapFactory.decodeStream(stream);
                 }
                 catch (Exception e) {
@@ -144,10 +153,7 @@ public class DynamicProperty {
                 }
             }
             case DRAWABLE: {
-                JSONObject drawableProperties = null;
-                try {
-                    drawableProperties = new JSONObject(v);
-                } catch (Exception e) {};
+                JSONObject drawableProperties = (JSONObject)v;
 
                 GradientDrawable gd = new GradientDrawable();
 
@@ -218,7 +224,7 @@ public class DynamicProperty {
             type = TYPE.NO_VALID;
         }
         try {
-            value = convertValue(jsonObject.getString("value"));
+            value = convertValue(jsonObject.get("value"));
         } catch (Exception e) {}
     }
 
@@ -284,6 +290,9 @@ public class DynamicProperty {
     }
     public Drawable getValueGradientDrawable() {
         return (Drawable)value;
+    }
+    public JSONObject getValueJSON() {
+        return JSONObject.class.cast(value);
     }
 
 

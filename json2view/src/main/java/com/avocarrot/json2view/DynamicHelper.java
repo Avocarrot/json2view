@@ -14,9 +14,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by avocarrot on 11/12/2014.
@@ -115,6 +121,30 @@ public class DynamicHelper {
                 break;
                 case DRAWABLEBOTTOM: {
                     applyCompoundDrawable(view, dynProp, 3);
+                }
+                break;
+                case ENABLED: {
+                    applyEnabled(view, dynProp);
+                }
+                break;
+                case SELECTED: {
+                    applySelected(view, dynProp);
+                }
+                break;
+                case CLICKABLE: {
+                    applyClickable(view, dynProp);
+                }
+                break;
+                case SCALEX: {
+                    applyScaleX(view, dynProp);
+                }
+                break;
+                case SCALEY: {
+                    applyScaleY(view, dynProp);
+                }
+                break;
+                case FUNCTION: {
+                    applyFunction(view, dynProp);
                 }
                 break;
             }
@@ -317,17 +347,19 @@ public class DynamicHelper {
 
     public static ViewGroup.LayoutParams createLayoutParams(ViewGroup viewGroup) {
         ViewGroup.LayoutParams params = null;
-        try {
+        if (viewGroup!=null) {
+            try {
             /* find parent viewGroup and create LayoutParams of that class */
-            String layoutParamsClassname = viewGroup.getClass().getName() + "$LayoutParams";
-            if (viewGroup instanceof AbsListView) {
-                layoutParamsClassname = AbsListView.LayoutParams.class.getName();
-            }
-            Class layoutParamsClass = Class.forName(layoutParamsClassname);
+                String layoutParamsClassname = viewGroup.getClass().getName() + "$LayoutParams";
+                if (viewGroup instanceof AbsListView) {
+                    layoutParamsClassname = AbsListView.LayoutParams.class.getName();
+                }
+                Class layoutParamsClass = Class.forName(layoutParamsClassname);
             /* create the actual layoutParams object */
-            params = (ViewGroup.LayoutParams) layoutParamsClass.getConstructor(Integer.TYPE, Integer.TYPE).newInstance(new Object[]{ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT});
-        } catch (Exception e) {
-            e.printStackTrace();
+                params = (ViewGroup.LayoutParams) layoutParamsClass.getConstructor(Integer.TYPE, Integer.TYPE).newInstance(new Object[]{ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         if (params == null)
             params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -408,6 +440,74 @@ public class DynamicHelper {
         }
     }
 
+    /**
+     * apply enabled in view
+     */
+    public static void applyEnabled(View view, DynamicProperty property) {
+        if (view != null) {
+            switch (property.type) {
+                case BOOLEAN: {
+                    view.setEnabled(property.getValueBoolean());
+                }
+                break;
+            }
+        }
+    }
+
+    /**
+     * apply selected in view
+     */
+    public static void applySelected(View view, DynamicProperty property) {
+        if (view != null) {
+            switch (property.type) {
+                case BOOLEAN: {
+                    view.setSelected(property.getValueBoolean());
+                }
+                break;
+            }
+        }
+    }
+    /**
+     * apply clickable in view
+     */
+    public static void applyClickable(View view, DynamicProperty property) {
+        if (view != null) {
+            switch (property.type) {
+                case BOOLEAN: {
+                    view.setClickable(property.getValueBoolean());
+                }
+                break;
+            }
+        }
+    }
+
+    /**
+     * apply selected in view
+     */
+    public static void applyScaleX(View view, DynamicProperty property) {
+        if (view != null) {
+            switch (property.type) {
+                case BOOLEAN: {
+                    view.setScaleX(property.getValueFloat());
+                }
+                break;
+            }
+        }
+    }
+
+    /**
+     * apply selected in view
+     */
+    public static void applyScaleY(View view, DynamicProperty property) {
+        if (view != null) {
+            switch (property.type) {
+                case BOOLEAN: {
+                    view.setScaleY(property.getValueFloat());
+                }
+                break;
+            }
+        }
+    }
 
     /*** TextView Properties ***/
 
@@ -601,6 +701,76 @@ public class DynamicHelper {
     }
 
 
+
+    /**
+     * apply generic function in View
+     */
+    public static void applyFunction(View view, DynamicProperty property) {
+
+        if (property.type == DynamicProperty.TYPE.JSON) {
+            try {
+                JSONObject json = property.getValueJSON();
+
+                String functionName = json.getString("function");
+                JSONArray args = json.getJSONArray("args");
+
+                Class[] argsClass;
+                Object[] argsValue;
+                if (args==null) {
+                    argsClass = new Class[0];
+                    argsValue = new Object[0];
+                } else {
+                    try {
+                        List<Class> classList = new ArrayList<>();
+                        List<Object> valueList= new ArrayList<>();
+
+                        int i=0;
+                        int count = args.length();
+                        for (; i<count ; i++) {
+                            JSONObject argJsonObj = args.getJSONObject(i);
+                            boolean isPrimitive = argJsonObj.has("primitive");
+                            String className = argJsonObj.getString( isPrimitive ? "primitive" : "class");
+                            String classFullName = className;
+                            if (!classFullName.contains("."))
+                                classFullName = "java.lang." + className;
+                            Class clazz = Class.forName(classFullName);
+                            if (isPrimitive) {
+                                Class primitiveType = (Class)clazz.getField("TYPE").get(null);
+                                classList.add( primitiveType );
+                            } else {
+                                classList.add( clazz );
+                            }
+
+                            try {
+                                valueList.add( getFromJSON(argJsonObj, "value", clazz) );
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        argsClass = classList.toArray(new Class[classList.size()]);
+                        argsValue = valueList.toArray(new Object[valueList.size()]);
+                    } catch (Exception e) {
+                        argsClass = new Class[0];
+                        argsValue = new Object[0];
+                    }
+                }
+
+                try {
+                    view.getClass().getMethod(functionName, argsClass).invoke(view, argsValue);
+                } catch (SecurityException e) {
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+
     /**
      * return the id (from the R.java autogenerated class) of the drawable that pass its name as argument
      */
@@ -687,5 +857,25 @@ public class DynamicHelper {
 
     }
 
+    private static Object getFromJSON(JSONObject json, String name, Class clazz) throws JSONException {
+        if ((clazz == Integer.class)||(clazz == Integer.TYPE)) {
+            return json.getInt(name);
+        } else if ((clazz == Boolean.class)||(clazz == Boolean.TYPE)) {
+            return json.getBoolean(name);
+        } else if ((clazz == Double.class)||(clazz == Double.TYPE)) {
+            return json.getDouble(name);
+        } else if ((clazz == Float.class)||(clazz == Float.TYPE)) {
+            return (float)json.getDouble(name);
+        } else if ((clazz == Long.class)||(clazz == Long.TYPE)) {
+            return json.getLong(name);
+        } else if (clazz == String.class) {
+            return json.getString(name);
+        } else if (clazz == JSONObject.class) {
+            return json.getJSONObject(name);
+        } else {
+            return json.get(name);
+
+        }
+    }
 
 }
