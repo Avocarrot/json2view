@@ -68,6 +68,7 @@ public class DynamicProperty {
         TEXT,
         TEXTCOLOR,
         TEXTSIZE,
+        TEXTSTYLE,
         ELLIPSIZE,
         MAXLINES,
         GRAVITY,

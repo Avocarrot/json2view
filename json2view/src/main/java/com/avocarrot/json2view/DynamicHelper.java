@@ -60,9 +60,14 @@ public class DynamicHelper {
                     applyTextSize(view, dynProp);
                 }
                 break;
+                case TEXTSTYLE: {
+                    applyTextStyle(view, dynProp);
+                }
+                break;
                 case PADDING: {
                     applyPadding(view, dynProp);
                 }
+                break;
                 case PADDING_LEFT: {
                     applyPadding(view, dynProp, 0);
                 }
@@ -553,6 +558,19 @@ public class DynamicHelper {
             switch (property.type) {
                 case DIMEN: {
                     ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, property.getValueFloat());
+                }
+                break;
+            }
+        }
+    }
+    /**
+     * apply the textStyle in textView
+     */
+    public static void applyTextStyle(View view, DynamicProperty property) {
+        if (view instanceof TextView) {
+            switch (property.type) {
+                case INTEGER: {
+                    ((TextView) view).setTypeface(null, property.getValueInt());
                 }
                 break;
             }
