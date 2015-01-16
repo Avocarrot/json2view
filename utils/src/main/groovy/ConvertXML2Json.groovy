@@ -1,7 +1,16 @@
 
-def layout = new XmlParser().parse("utils/src/main/groovy/test.xml")
+def inputFile = new File(this.args[0])
 
-println  new groovy.json.JsonBuilder( createView(layout) ).toString();
+// Some more validations.
+if (!inputFile.exists()) {
+    // Nothing to process, return
+    println "The input file doesn't exist. Process incomplete | " + this.args[0]
+    return
+}
+
+def layout = new XmlParser().parse(inputFile)
+
+println new groovy.json.JsonBuilder( createView(layout) ).toString();
 
 View createView (node) {
 

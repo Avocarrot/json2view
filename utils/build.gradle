@@ -5,16 +5,8 @@ repositories {
 }
 
 dependencies {
-//    compile project(':json2view')
     compile 'org.codehaus.groovy:groovy-all:2.1.6'
-//    compile files('json2view/build/intermediates/classes/debug/com/avocarrot/json2view')
 }
-
-//buildscript {
-//    dependencies {
-//        classpath files(['../../json2view/build/intermediates/classes/debug/com/avocarrot/json2view/'])
-//    }
-//}
 
 task runScript(dependsOn: 'classes', type: JavaExec) {
     description 'Run Groovy script'
@@ -25,9 +17,9 @@ task runScript(dependsOn: 'classes', type: JavaExec) {
     // Set classpath for running the Groovy script.
     classpath = sourceSets.main.runtimeClasspath
 
-    if (project.hasProperty('custom')) {
+    if (project.hasProperty('xml')) {
         // Pass command-line argument to script.
-        args project.getProperty('custom')
+        args new File(".").absolutePath + File.separator + project.getProperty('xml')
     }
 }
 
