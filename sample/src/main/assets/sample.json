@@ -52,7 +52,7 @@
 			"properties": [{
 				"name": "id",
 				"type": "",
-				"value": "adClose"
+				"value": "testClick"
 			},
 			{
 				"name": "layout_width",
@@ -77,7 +77,7 @@
 			{
 				"name": "text",
 				"type": "string",
-				"value": "I am not interested"
+				"value": "Try to click"
 			},
 			{
 				"name": "gravity",
