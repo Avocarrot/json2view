@@ -1,9 +1,10 @@
+println "*** ConvertXML2Json *** "
+println "Still in experimental mode :("
+
 
 def inputFile = new File(this.args[0])
 
-// Some more validations.
 if (!inputFile.exists()) {
-    // Nothing to process, return
     println "The input file doesn't exist. Process incomplete | " + this.args[0]
     return
 }
@@ -70,6 +71,11 @@ Property createProperty (attribute) {
         case "PADDING_BOTTOM":
         case "PADDING":
         case "TEXTSIZE":
+        case "LAYOUT_MARGINLEFT":
+        case "LAYOUT_MARGINRIGHT":
+        case "LAYOUT_MARGINTOP":
+        case "LAYOUT_MARGINBOTTOM":
+        case "LAYOUT_MARGIN":
             type = "dimen";
             break;
         case "LAYOUT_ALIGNWITHPARENTIFMISSING":
