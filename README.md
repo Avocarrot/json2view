@@ -7,19 +7,18 @@ Thanks for taking a look on **Json2View**.
 Json2View can convert a compatible json file to an android view so you can load dynamic view in your android application.
 
 # Installation
-- Download project <br/>
+- Download project
 ```
 git clone https://github.com/Avocarrot/koukouroukou.git
 ```
 
-- add json2view in your project by adding <br/>
+- add json2view in your project by adding in your settings.gradle
 ```
 include ':json2view'
 project(':json2view').projectDir = new File(settingsDir, '$(koukouroukouPath)/koukouroukou/json2view')
 ```
-in your settings.gradle
 
-- add in build.gradle of application module (not project build.gradle) in `dependencies` section <br/>
+- add in build.gradle of application module (not project build.gradle) in `dependencies` section
 ```
 compile project(':json2view')
 ```
