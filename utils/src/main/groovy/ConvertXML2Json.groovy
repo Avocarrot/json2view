@@ -23,6 +23,7 @@ View createView (node) {
     def views = [];
 
     name = node.name().toString();
+    if (name == "View") name = "android.view.View"
 
     node.attributes().each { t ->
         properties.push( createProperty(t) )
@@ -100,7 +101,7 @@ Property createProperty (attribute) {
 }
 
 @groovy.transform.Canonical
-@ groovy.transform.ToString(excludes='view')
+@groovy.transform.ToString(excludes='views')
 class View {
     String widget
     List<Property> properties
