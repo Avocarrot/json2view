@@ -63,8 +63,8 @@ eg. json to create a TextView with textSize : 12sp and text : "Hello Avocarrot!"
 }
 ```
 
-You can use *ConvertXML2JSON.groovy* script in utils to convert any xml to json2view valid json input file <br/>
-_(the script needs further development to create a valid json for *every* case)_ <br/>
+You can use *ConvertXML2JSON.groovy* (from ./utils) to convert any android xml to json2view valid json file
+_(the script needs further development to create a valid json for <b>every</b> case)_ <br/>
 try : <br/>
 
 ```
