@@ -8,20 +8,14 @@ Json2View can convert a compatible json file to an android view so you can load 
 
 # Installation
 - Download project
-```
-git clone https://github.com/Avocarrot/koukouroukou.git
-```
+```git clone https://github.com/Avocarrot/koukouroukou.git```
 
 - add json2view in your project by adding in your settings.gradle
-```
-include ':json2view'
-project(':json2view').projectDir = new File(settingsDir, '$(koukouroukouPath)/koukouroukou/json2view')
-```
+```include ':json2view'
+project(':json2view').projectDir = new File(settingsDir, '$(koukouroukouPath)/koukouroukou/json2view')```
 
 - add in build.gradle of application module (not project build.gradle) in `dependencies` section
-```
-compile project(':json2view')
-```
+```compile project(':json2view')```
 
 # Usage
 create and attach view in the specific Parent (created from xml) <br/>
