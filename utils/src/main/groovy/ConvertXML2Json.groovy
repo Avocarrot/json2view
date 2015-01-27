@@ -1,5 +1,8 @@
+println()
+println "*********************** "
 println "*** ConvertXML2Json *** "
 println "Still in experimental mode :("
+println()
 
 
 def inputFile = new File(this.args[0])

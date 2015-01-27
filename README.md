@@ -42,16 +42,17 @@ The input json has 3 fields for every view we want to create :
 
 * `widget` : canonicalName of View (for views in package `android.widget` you can ommit `android.widget`)
 * `properties` : list of properties for the view. ([Available Properties](https://github.com/Avocarrot/koukouroukou/wiki/Available-Properties)) By default we add `layout_width` & `layout_height` with value `wrap_content'
-* `views` : (optional) for View Group add children views
+* `views` : children views for ViewGroup _(optional)_
 
- eg. json to create a empty TextView
+eg. json to create a empty TextView
 ```javascript
 {
     "widget": "android.widgetTextView",
 	"properties": []
 }
 ```
- eg. json to create a TextView with textSize : 12sp and text : "Hello Avocarrot!"
+
+eg. json to create a TextView with textSize : 12sp and text : "Hello Avocarrot!"
 ```javascript
 {
     "widget": "TextView",
@@ -61,6 +62,16 @@ The input json has 3 fields for every view we want to create :
 	]
 }
 ```
+
+You can use *ConvertXML2JSON.groovy* script in utils to convert any xml to json2view valid json input file <br/>
+_(the script needs further development to create a valid json for *every* case)_ <br/>
+try : <br/>
+
+```
+./gradlew runScript -Pxml=./pathToInputXmlFile.xml
+```
+from the root folder of the project
+
 
 
 ## pros
