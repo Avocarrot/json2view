@@ -8,14 +8,24 @@ Json2View can convert a compatible json file to an android view so you can load 
 
 # Installation
 - Download project
-```git clone https://github.com/Avocarrot/koukouroukou.git```
+```
+git clone https://github.com/Avocarrot/koukouroukou.git
+```
+
 
 - add json2view in your project by adding in your settings.gradle
-```include ':json2view'
-project(':json2view').projectDir = new File(settingsDir, '$(koukouroukouPath)/koukouroukou/json2view')```
+```
+include ':json2view'
+project(':json2view'*).projectDir = new File(settingsDir, '$(koukouroukouPath)/koukouroukou/json2view')
+```
+
 
 - add in build.gradle of application module (not project build.gradle) in `dependencies` section
-```compile project(':json2view')```
+
+```
+compile project(':json2view')
+```
+
 
 # Usage
 create and attach view in the specific Parent (created from xml) <br/>
@@ -28,18 +38,29 @@ View sampleView = DynamicView.createView(this, jsonObject, viewParent);
 you can check more example in [Usage](https://github.com/Avocarrot/koukouroukou/wiki/Usage)
 
 # Basic Json Format
-The input json must have 3 fields for every View you need to add. To add a TextView
+The input json has 3 fields for every view we want to create :
+
+* `widget` : canonicalName of View (for views in package `android.widget` you can ommit `android.widget`)
+* `properties` : list of properties for the view. ([Available Properties](https://github.com/Avocarrot/koukouroukou/wiki/Available-Properties)) By default we add `layout_width` & `layout_height` with value `wrap_content'
+* `views` : (optional) for View Group add children views
+
+ eg. json to create a empty TextView
 ```javascript
 {
-    "widget": "android.widget.TextView",
-	"properties": [],
-	"views":[] /*optional*/
+    "widget": "android.widgetTextView",
+	"properties": []
 }
 ```
-
-# Supported Properties
-Most of the properties for Android View are supported. <br/>
-You can find the full list [Available Properties](https://github.com/Avocarrot/koukouroukou/wiki/Available-Properties)
+ eg. json to create a TextView with textSize : 12sp and text : "Hello Avocarrot!"
+```javascript
+{
+    "widget": "TextView",
+	"properties": [
+	    {"name":"textSize", "type": "dimen", "value":"13sp"},
+	    {"name":"text", "type": "string", "value":"Hello Avocarrot!"}
+	]
+}
+```
 
 
 ## pros
