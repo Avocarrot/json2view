@@ -12,10 +12,10 @@ This removes the hassle everytime you want to make small changes in UI to have t
 Hope you find it useful and any feedback or PRs are more than welcome!
 
 ## Pros
-* change layout for a view without the need to update the apk
+* Change layout for a view without the need to update the apk
 
 ## Cons
-* runtime creation of view without the precompiled version of xml in apk (res/layout) and for highly complex layouts this can be a potential latency issue
+* Runtime creation of view without the precompiled version of xml in apk (res/layout) and for highly complex layouts this can be a potential latency issue
 
 You can find more help and examples in the [wiki](https://github.com/Avocarrot/json2view/wiki).
 
