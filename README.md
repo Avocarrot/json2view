@@ -1,8 +1,6 @@
 json2view  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?token=JZNsn6pty78ndT1Z2naj&branch=master)
 ======
 
-## Introduction
-
 **json2view** is a simple library that can convert a compatible JSON file to an Android view so you can load dynamically the view in your Android app without the need to update the APK.
 
 This removes the hassle of updating, re-compiling and uploading the APK to Google Play everytime you want to make small or big changes in the UI.
@@ -12,6 +10,7 @@ This removes the hassle of updating, re-compiling and uploading the APK to Googl
 - [How it works](#how-it-works)
 - [Examples](#examples)
 - [Installation](#installation)
+- [Getting started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -23,18 +22,21 @@ This removes the hassle of updating, re-compiling and uploading the APK to Googl
 
 In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to run A/B test experiments and quickly deploy UI enhancements that improve revenue performance of native ads integrations in our network.
 
-## How it works?
+## How it works
 
 You can parse any xml through the json2view library to create a JSON that will be used at runtime to dynamically generate the Android UI using native code. This JSON can be hosted anywhere on the internet (your own server, Dropbox, Github Pages etc.) and can be fetched in your app at any point you decide.
-
 
 Note: Runtime creation of a view without the precompiled version of xml in apk (res/layout), especially for highly complex layouts, can be a potential latency issue.
 
 ## Examples
 
+### Changing text color
+
 Using json2view to change text color, background color and position of a view. [(more details)](https://github.com/Avocarrot/json2view/wiki/Changing-Properties)
 
 ![output](https://github.com/Avocarrot/json2view/blob/master/example_assets/test00.png)
+
+### Reorganizing the layout
 
 Using json2view to reorganize the layout of a screen. [(more details)](https://github.com/Avocarrot/json2view/wiki/Changing-Layouts)
 
@@ -64,8 +66,9 @@ project(':json2view'*).projectDir = new File(settingsDir, '$(json2viewPath)/json
 compile project(':json2view')
 ```
 
+## Getting started
 
-## Basic JSON Format
+### Basic JSON format
 The input JSON has 3 fields for every view we want to create :
 
 * `widget` : canonicalName of View (for views in package `android.widget` you can ommit `android.widget`)
@@ -103,7 +106,7 @@ try : <br/>
 from the root folder of the project
 
 
-## Loading dynamic Layout
+### Loading dynamic layout
 create and attach view in the specific Parent (created from xml) <br/>
 ```java
 ViewParent viewParent = (ViewParent) findViewById(R.id.parent_view_id)
@@ -118,8 +121,8 @@ You can check some example use cases in the wiki [here](https://github.com/Avoca
 
 1. Fork the repo
 2. Apply your changes
-3. Write your tests
-4. Create a new pull request
+3. Write tests
+4. Submit your pull request
 
 For feedback or suggestions you can drop us a line at support@avocarrot.com
 
