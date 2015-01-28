@@ -3,8 +3,8 @@ json2view  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?tok
 
 # Dynamic layouts for Android
 
-Thanks for taking a look on **Json2View**.
-Json2View can convert a compatible json file to an android view so you can load dynamic view in your android application.
+Thanks for taking a look on **json2view**.
+json2view can convert a compatible json file to an android view so you can load dynamic view in your android application.
 
 
 ## pros
