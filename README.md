@@ -1,35 +1,37 @@
 json2view  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?token=JZNsn6pty78ndT1Z2naj&branch=master)
 ======
 
-# Introduction
+## Introduction
 
 **json2view** is a simple library that can convert a compatible JSON file to an Android view so you can load dynamically the view in your Android app without the need to update the APK.
 
 This removes the hassle of updating, re-compiling and uploading the APK to Google Play everytime you want to make small or big changes in the UI.
 
-# What are some use cases for json2view
+## Topics
+- [Common use cases](#common-use-cases)
+- [How it works](#how-it-works)
+- [Examples](#examples)
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Common use cases
 
 1. If you need to A/B test different UI designs without the need to re-upload your APK.
 2. If your app's UI changes dynamically based on different users or scenarios.
 3. If you need to deploy UI fixes quickly and in real-time.
 
-* In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to run A/B test experiments and quickly deploy UI enhancements that improve revenue performance of native ads integrations in our network.
+In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to run A/B test experiments and quickly deploy UI enhancements that improve revenue performance of native ads integrations in our network.
 
-# How it works?
+## How it works?
 
 You can parse any xml through the json2view library to create a JSON that will be used at runtime to dynamically generate the Android UI using native code. This JSON can be hosted anywhere on the internet (your own server, Dropbox, Github Pages etc.) and can be fetched in your app at any point you decide.
 
 ![Flow](https://github.com/Avocarrot/json2view/blob/master/example_assets/json2viewFlow.jpg)
 
-# Are there any drawbacks?
+Note: Runtime creation of a view without the precompiled version of xml in apk (res/layout), especially for highly complex layouts, can be a potential latency issue.
 
-Runtime creation of a view without the precompiled version of xml in apk (res/layout), especially for highly complex layouts, can be a potential latency issue.
-
-# Sample project
-
-A sample project for quick use of the lib can be found in the [sample submodule](https://github.com/Avocarrot/json2view/tree/master/sample)
-
-# Examples
+## Examples
 
 Using json2view to change text color, background color and position of a view. [(more details)](https://github.com/Avocarrot/json2view/wiki/Changing-Properties)
 
@@ -41,7 +43,9 @@ Using json2view to reorganize the layout of a screen. [(more details)](https://g
 
 You can find more help and examples in the [wiki](https://github.com/Avocarrot/json2view/wiki).
 
-# Installation
+Also, a sample project for quick use of the lib can be found in the [sample submodule](https://github.com/Avocarrot/json2view/tree/master/sample)
+
+## Installation
 - Download project
 ```
 git clone https://github.com/Avocarrot/json2view.git
@@ -62,7 +66,7 @@ compile project(':json2view')
 ```
 
 
-# Basic JSON Format
+## Basic JSON Format
 The input JSON has 3 fields for every view we want to create :
 
 * `widget` : canonicalName of View (for views in package `android.widget` you can ommit `android.widget`)
@@ -100,7 +104,7 @@ try : <br/>
 from the root folder of the project
 
 
-# Loading dynamic Layout
+## Loading dynamic Layout
 create and attach view in the specific Parent (created from xml) <br/>
 ```java
 ViewParent viewParent = (ViewParent) findViewById(R.id.parent_view_id)
@@ -111,9 +115,14 @@ View sampleView = DynamicView.createView(this, jsonObject, viewParent);
 You can check some example use cases in the wiki [here](https://github.com/Avocarrot/json2view/wiki/Creating-Dynamic-Layouts)
 
 
-# Contact
+## Contributing
+
+1. Fork the repo
+2. Apply your changes
+3. Write your tests
+4. Create a new pull request
 
 For feedback or suggestions you can drop us a line at support@avocarrot.com
 
-# License
+## License
 [The MIT License (MIT)](https://github.com/Avocarrot/json2view/blob/master/LICENSE)
