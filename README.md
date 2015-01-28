@@ -9,8 +9,6 @@ You can parse any xml through the json2view library to create a JSON that will b
 
 This removes the hassle everytime you want to make small changes in UI to have to update the APK which includes re-compiling and uploading to Google Play as well as every single user manually deciding whether to update your app or not (if they have opted-out from auto-update).
 
-Some examples when this is useful include having just released a new feature and your mobile analytics show a slow user adoption, so you might want to deploy a quick UI fix to draw better attention on the call-to-actions without having to wait for the next big APK update. In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to run A/B test experiments and quickly deploy UI enhancements that improve revenue performance of native ads integrations in our network.
-
 Hope you find it useful and any feedback or PRs are more than welcome!
 
 ## pros
@@ -27,6 +25,8 @@ Also, a sample project for quick use of the lib can be found in the [sample subm
 # How It Works
 
 ![Flow](https://github.com/Avocarrot/json2view/blob/master/example_assets/json2viewFlow.jpg)
+
+Some examples when json2view is useful include having just released a new feature and your mobile analytics show a slow user adoption, so you might want to deploy a quick UI fix to draw better attention on the call-to-actions without having to wait for the next big APK update. In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to run A/B test experiments and quickly deploy UI enhancements that improve revenue performance of native ads integrations in our network.
 
 
 # Installation
