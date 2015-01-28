@@ -1,5 +1,7 @@
-json2view - update native Android UI on the fly  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?token=JZNsn6pty78ndT1Z2naj&branch=master)
+json2view  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?token=JZNsn6pty78ndT1Z2naj&branch=master)
 ======
+
+# Updating Native Android UI
 
 **json2view** is a simple library that can convert a compatible JSON file to an Android view so you can load dynamically the view in your Android app without the need to update the APK.
 
