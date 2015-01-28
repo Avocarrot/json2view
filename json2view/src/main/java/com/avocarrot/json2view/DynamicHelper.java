@@ -350,6 +350,16 @@ public class DynamicHelper {
                         }
                     }
                     break;
+                    case LAYOUT_WEIGHT: {
+                        switch (dynProp.type) {
+                            case FLOAT: {
+                                if (params instanceof LinearLayout.LayoutParams)
+                                    ((LinearLayout.LayoutParams) params).weight = dynProp.getValueFloat();
+                            }
+                            break;
+                        }
+                    }
+                    break;
                 }
             } catch (Exception e) {
             }

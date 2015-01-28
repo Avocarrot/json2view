@@ -32,6 +32,7 @@ public class DynamicProperty {
         STRING,
         DIMEN,
         INTEGER,
+        FLOAT,
         COLOR,
         REF,
         BOOLEAN,
@@ -107,6 +108,7 @@ public class DynamicProperty {
         LAYOUT_TORIGHTOF,
         LAYOUT_TOSTARTOF,
         LAYOUT_GRAVITY,
+        LAYOUT_WEIGHT,
         ORIENTATION,
 
         FUNCTION
@@ -126,6 +128,9 @@ public class DynamicProperty {
         switch (type) {
             case INTEGER: {
                 return Integer.parseInt(v.toString());
+            }
+            case FLOAT: {
+                return Float.parseFloat(v.toString());
             }
             case DIMEN: {
                 return  convertDimenToPixel(v.toString());

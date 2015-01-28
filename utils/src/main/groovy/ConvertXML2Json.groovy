@@ -96,6 +96,9 @@ Property createProperty (attribute) {
         case "LAYOUT_ALIGNPARENTTOP":
             type = "BOOLEAN";
             break;
+        case "LAYOUT_WEIGHT":
+            type = "float";
+            break;
     }
 
     return new Property( name, type, value );
