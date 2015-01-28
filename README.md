@@ -1,41 +1,45 @@
 json2view  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?token=JZNsn6pty78ndT1Z2naj&branch=master)
 ======
 
-# Updating Native Android UI
+# Introduction
 
 **json2view** is a simple library that can convert a compatible JSON file to an Android view so you can load dynamically the view in your Android app without the need to update the APK.
 
-You can parse any xml through the json2view library to create a JSON that will be used at runtime to dynamically generate the Android UI using native code. This JSON can be hosted anywhere on the internet (your own server, Dropbox, Github Pages etc.) and can be fetched in your app at any point you decide.
+This removes the hassle of updating, re-compiling and uploading the APK to Google Play everytime you want to make small or big changes in the UI.
 
-This removes the hassle everytime you want to make small changes in UI to have to update the APK which includes re-compiling and uploading to Google Play as well as every single user manually deciding whether to update your app or not (if they have opted-out from auto-update).
+# What are some use cases for json2view
+
+1. If you need to A/B test different UI designs without the need to re-upload your APK.
+2. If your app's UI changes dynamically based on different users or scenarios.
+3. If you need to deploy UI fixes quickly and in real-time.
+
+* In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to run A/B test experiments and quickly deploy UI enhancements that improve revenue performance of native ads integrations in our network.
+
+# How it works?
+
+You can parse any xml through the json2view library to create a JSON that will be used at runtime to dynamically generate the Android UI using native code. This JSON can be hosted anywhere on the internet (your own server, Dropbox, Github Pages etc.) and can be fetched in your app at any point you decide.
 
 ![Flow](https://github.com/Avocarrot/json2view/blob/master/example_assets/json2viewFlow.jpg)
 
-Some examples when json2view is useful include having just released a new feature and your mobile analytics show a slow user adoption, so you might want to deploy a quick UI fix to draw better attention on the call-to-actions without having to wait for the next big APK update. In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to run A/B test experiments and quickly deploy UI enhancements that improve revenue performance of native ads integrations in our network.
+# Are there any drawbacks?
 
-## Pros
-* Change layout for a view without the need to update the apk
+Runtime creation of a view without the precompiled version of xml in apk (res/layout), especially for highly complex layouts, can be a potential latency issue.
 
-## Cons
-* Runtime creation of view without the precompiled version of xml in apk (res/layout) and for highly complex layouts this can be a potential latency issue
+# Sample project
 
-You can find more help and examples in the [wiki](https://github.com/Avocarrot/json2view/wiki).
-
-Also, a sample project for quick use of the lib can be found in the [sample submodule](https://github.com/Avocarrot/json2view/tree/master/sample)
-
-Hope you find it useful and any feedback or PRs are more than welcome!
-
+A sample project for quick use of the lib can be found in the [sample submodule](https://github.com/Avocarrot/json2view/tree/master/sample)
 
 # Examples
 
-![output](https://github.com/Avocarrot/json2view/blob/master/example_assets/test00.png)
-
 Using json2view to change text color, background color and position of a view. [(more details)](https://github.com/Avocarrot/json2view/wiki/Changing-Properties)
 
-![output](https://github.com/Avocarrot/json2view/blob/master/example_assets/test01.png)
+![output](https://github.com/Avocarrot/json2view/blob/master/example_assets/test00.png)
 
 Using json2view to reorganize the layout of a screen. [(more details)](https://github.com/Avocarrot/json2view/wiki/Changing-Layouts)
 
+![output](https://github.com/Avocarrot/json2view/blob/master/example_assets/test01.png)
+
+You can find more help and examples in the [wiki](https://github.com/Avocarrot/json2view/wiki).
 
 # Installation
 - Download project
