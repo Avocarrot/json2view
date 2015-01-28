@@ -21,8 +21,18 @@ You can find more help and examples in the [wiki](https://github.com/Avocarrot/j
 
 Also, a sample project for quick use of the lib can be found in the [sample submodule](https://github.com/Avocarrot/json2view/tree/master/sample)
 
+# Examples
 
-# How It Works
+![output](https://github.com/Avocarrot/json2view/blob/master/example_assets/test00.png)
+
+Using json2view to change text color, background color and position of a view. [(more details)](https://github.com/Avocarrot/json2view/wiki/Changing-Properties)
+
+![output](https://github.com/Avocarrot/json2view/blob/master/example_assets/test01.png)
+
+Using json2view to reorganize the layout of a screen. [(more details)](https://github.com/Avocarrot/json2view/wiki/Changing-Layouts)
+
+
+# Why is it better?
 
 ![Flow](https://github.com/Avocarrot/json2view/blob/master/example_assets/json2viewFlow.jpg)
 
