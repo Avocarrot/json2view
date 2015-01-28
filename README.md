@@ -9,7 +9,9 @@ You can parse any xml through the json2view library to create a JSON that will b
 
 This removes the hassle everytime you want to make small changes in UI to have to update the APK which includes re-compiling and uploading to Google Play as well as every single user manually deciding whether to update your app or not (if they have opted-out from auto-update).
 
-Hope you find it useful and any feedback or PRs are more than welcome!
+![Flow](https://github.com/Avocarrot/json2view/blob/master/example_assets/json2viewFlow.jpg)
+
+Some examples when json2view is useful include having just released a new feature and your mobile analytics show a slow user adoption, so you might want to deploy a quick UI fix to draw better attention on the call-to-actions without having to wait for the next big APK update. In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to run A/B test experiments and quickly deploy UI enhancements that improve revenue performance of native ads integrations in our network.
 
 ## Pros
 * Change layout for a view without the need to update the apk
@@ -21,6 +23,9 @@ You can find more help and examples in the [wiki](https://github.com/Avocarrot/j
 
 Also, a sample project for quick use of the lib can be found in the [sample submodule](https://github.com/Avocarrot/json2view/tree/master/sample)
 
+Hope you find it useful and any feedback or PRs are more than welcome!
+
+
 # Examples
 
 ![output](https://github.com/Avocarrot/json2view/blob/master/example_assets/test00.png)
@@ -30,13 +35,6 @@ Using json2view to change text color, background color and position of a view. [
 ![output](https://github.com/Avocarrot/json2view/blob/master/example_assets/test01.png)
 
 Using json2view to reorganize the layout of a screen. [(more details)](https://github.com/Avocarrot/json2view/wiki/Changing-Layouts)
-
-
-# Why is it better?
-
-![Flow](https://github.com/Avocarrot/json2view/blob/master/example_assets/json2viewFlow.jpg)
-
-Some examples when json2view is useful include having just released a new feature and your mobile analytics show a slow user adoption, so you might want to deploy a quick UI fix to draw better attention on the call-to-actions without having to wait for the next big APK update. In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to run A/B test experiments and quickly deploy UI enhancements that improve revenue performance of native ads integrations in our network.
 
 
 # Installation
