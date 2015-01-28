@@ -80,6 +80,8 @@ Property createProperty (attribute) {
         case "LAYOUT_MARGINTOP":
         case "LAYOUT_MARGINBOTTOM":
         case "LAYOUT_MARGIN":
+        case "MINWIDTH":
+        case "MINHEIGHT":
             type = "dimen";
             break;
         case "LAYOUT_ALIGNWITHPARENTIFMISSING":

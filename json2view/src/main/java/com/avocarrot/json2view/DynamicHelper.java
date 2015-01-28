@@ -84,6 +84,14 @@ public class DynamicHelper {
                     applyPadding(view, dynProp, 3);
                 }
                 break;
+                case MINWIDTH: {
+                    applyMinWidth(view, dynProp);
+                }
+                break;
+                case MINHEIGTH: {
+                    applyMinHeight(view, dynProp);
+                }
+                break;
                 case ELLIPSIZE: {
                     applyEllipsize(view, dynProp);
                 }
@@ -441,6 +449,28 @@ public class DynamicHelper {
                     view.setPadding(padding[0], padding[1], padding[2], padding[3]);
                 }
                 break;
+            }
+        }
+    }
+
+    /**
+     * apply minimum Width in view
+     */
+    public static void applyMinWidth(View view, DynamicProperty property) {
+        if (view != null) {
+            if (property.type == DynamicProperty.TYPE.DIMEN) {
+                view.setMinimumWidth(property.getValueInt());
+            }
+        }
+    }
+
+    /**
+     * apply minimum Height in view
+     */
+    public static void applyMinHeight(View view, DynamicProperty property) {
+        if (view != null) {
+            if (property.type == DynamicProperty.TYPE.DIMEN) {
+                view.setMinimumHeight(property.getValueInt());
             }
         }
     }

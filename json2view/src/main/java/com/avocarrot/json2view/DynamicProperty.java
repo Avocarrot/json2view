@@ -64,6 +64,8 @@ public class DynamicProperty {
         CLICKABLE,
         SCALEX,
         SCALEY,
+        MINWIDTH,
+        MINHEIGTH,
         /* textView */
         TEXT,
         TEXTCOLOR,

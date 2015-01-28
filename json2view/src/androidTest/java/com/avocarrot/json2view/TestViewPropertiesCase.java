@@ -103,6 +103,25 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
         assertEquals(view.getPaddingBottom(), 10);
     }
 
+    /* test minimum Width & Height */
+    public void testMinDimensions() {
+        final View view = DynamicView.createView(
+            context,
+            dummyJsonObj
+                .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.MINWIDTH).setType(TYPE.DIMEN).setValue(250).build())
+                .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.MINHEIGTH).setType(TYPE.DIMEN).setValue(100).build())
+                .build());
+        try {
+            runTestOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    assertEquals(view.getMinimumWidth(), 250);
+                    assertEquals(view.getMeasuredHeight(), 100);
+                }
+            });
+        } catch (Throwable e) {}
+    }
+
     /* test text Color */
     public void testTextColor() {
         View view = DynamicView.createView(
