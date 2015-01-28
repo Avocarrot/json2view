@@ -5,7 +5,6 @@ json2view  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?tok
 
 This removes the hassle of updating, re-compiling and uploading the APK to Google Play everytime you want to make small or big changes in the UI.
 
-## Topics
 - [Common use cases](#common-use-cases)
 - [How it works](#how-it-works)
 - [Examples](#examples)
