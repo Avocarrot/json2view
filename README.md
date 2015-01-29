@@ -8,16 +8,18 @@ This removes the hassle of updating, re-compiling and uploading the APK to Googl
 <table>
 <tr>
 <td>
-- [Common use cases](#common-use-cases)
-- [How it works](#how-it-works)
-- [Examples](#examples)
-- [Installation](#installation)
-- [Getting started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+<ul class="task-list">
+<li><a href="#common-use-cases">Common use cases</a></li>
+<li><a href="#how-it-works">How it works</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
 </td>
 <td>
-![json2view logo](https://github.com/Avocarrot/json2view/blob/master/example_assets/json2view.jpg)
+<img alt="json2view logo" src="https://github.com/Avocarrot/json2view/blob/master/example_assets/json2view.jpg" width="250px"/>
 </td>
 </tr>
 </table>
