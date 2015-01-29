@@ -19,7 +19,7 @@ This removes the hassle of updating, re-compiling and uploading the APK to Googl
 </ul>
 </td>
 <td style="width:60%; border: 0px; text-align:right;">
-<img alt="json2view logo" src="https://github.com/Avocarrot/json2view/blob/master/example_assets/json2view.jpg" width="250px"/>
+<img alt="json2view logo" src="https://github.com/Avocarrot/json2view/blob/master/example_assets/json2view.png" width="250px"/>
 </td>
 </tr>
 </table>
