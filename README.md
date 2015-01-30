@@ -1,4 +1,4 @@
-json2view  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?token=JZNsn6pty78ndT1Z2naj&branch=master)
+json2view  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?token=JZNsn6pty78ndT1Z2naj&branch=master) 
 ======
 
 **json2view** is a simple library that can convert a compatible JSON file to an Android view so you can load dynamically the view in your Android app without the need to update the APK.
@@ -141,3 +141,6 @@ For feedback or suggestions you can drop us a line at support@avocarrot.com
 
 ## License
 [The MIT License (MIT)](https://github.com/Avocarrot/json2view/blob/master/LICENSE)
+
+
+Also check out the project at [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-json2view-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1453)
