@@ -313,13 +313,13 @@ public class DynamicProperty {
 
     float convertDimenToPixel(String dimen) {
         if (dimen.endsWith("dp"))
-            return DynamicHelper.dpToPx(Float.parseFloat(dimen.replaceAll("dp", "")));
+            return DynamicHelper.dpToPx(Float.parseFloat(dimen.substring(0, dimen.length() - 2)));
         else if (dimen.endsWith("sp"))
-            return DynamicHelper.spToPx(Float.parseFloat(dimen.replaceAll("sp", "")));
+            return DynamicHelper.spToPx(Float.parseFloat(dimen.substring(0, dimen.length() - 2)));
         else if (dimen.endsWith("px"))
-            return Integer.parseInt(dimen.replaceAll("px", ""));
+            return Integer.parseInt(dimen.substring(0, dimen.length() - 2));
         else if (dimen.endsWith("%"))
-            return (int)(Float.parseFloat(dimen.replaceAll("%", ""))/100f * DynamicHelper.deviceWidth());
+            return (int)(Float.parseFloat(dimen.substring(0, dimen.length() - 1))/100f * DynamicHelper.deviceWidth());
         else if (dimen.equalsIgnoreCase("match_parent"))
             return ViewGroup.LayoutParams.MATCH_PARENT;
         else if (dimen.equalsIgnoreCase("wrap_content"))
