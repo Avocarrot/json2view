@@ -1,4 +1,4 @@
-json2view  ![travis-ci](https://travis-ci.org/Avocarrot/json2view.svg)
+json2view  ![travis-ci](https://magnum.travis-ci.com/Avocarrot/json2view.svg?token=JZNsn6pty78ndT1Z2naj&branch=master)
 ======
 
 **json2view** is a simple library that can convert a compatible JSON file to an Android view so you can load dynamically the view in your Android app without the need to update the APK.
@@ -19,7 +19,7 @@ This removes the hassle of updating, re-compiling and uploading the APK to Googl
 </ul>
 </td>
 <td style="width:60%; border: 0px; text-align:right;">
-<img alt="json2view logo" src="https://github.com/Avocarrot/json2view/blob/master/example_assets/json2view.jpg" width="250px"/>
+<img alt="json2view logo" src="https://github.com/Avocarrot/json2view/blob/master/example_assets/json2view.png" width="250px"/>
 </td>
 </tr>
 </table>
@@ -36,6 +36,8 @@ In the case of [Avocarrot](http://www.avocarrot.com), we are using json2view to 
 ## How it works
 
 You can parse any xml through the json2view library to create a JSON that will be used at runtime to dynamically generate the Android UI using native code. This JSON can be hosted anywhere on the internet (your own server, Dropbox, Github Pages etc.) and can be fetched in your app at any point you decide.
+
+<img alt="how it works schematic" src="https://github.com/Avocarrot/json2view/blob/master/example_assets/how_it_works.png" width="700px"/>
 
 Note: Runtime creation of a view without the precompiled version of xml in apk (res/layout), especially for highly complex layouts, can be a potential latency issue.
 
@@ -139,3 +141,6 @@ For feedback or suggestions you can drop us a line at support@avocarrot.com
 
 ## License
 [The MIT License (MIT)](https://github.com/Avocarrot/json2view/blob/master/LICENSE)
+
+
+Also check out the project at [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-json2view-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1453)
