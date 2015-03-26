@@ -889,6 +889,7 @@ public class DynamicHelper {
 
     /**
      * get ViewHolder class and make reference for evert @link(DynamicViewId) to the actual view
+     * if target contains HashMap<String, Integer> will replaced with the idsMap
      */
     public static void parseDynamicView(Object target, View container, HashMap<String, Integer> idsMap) {
 
@@ -909,8 +910,14 @@ public class DynamicHelper {
                         e.printStackTrace();
                     }
                 }
+            } else if ((field.getName().equalsIgnoreCase("ids")) && (field.getType() == idsMap.getClass())) {
+                try {
+                    field.set(target, idsMap);
+                } catch (IllegalArgumentException e) {
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
-
         }
 
     }

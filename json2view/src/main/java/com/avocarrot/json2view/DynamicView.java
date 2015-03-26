@@ -34,7 +34,7 @@ public class DynamicView {
     /**
      * @param jsonObject : json object
      * @param parent : parent viewGroup
-     * @param holderClass : class that will be created as an holder and attached as a tag in the View
+     * @param holderClass : class that will be created as an holder and attached as a tag in the View, If contains HashMap ids will replaced with idsMap
      * @return the view that created
      */
     public static View createView (Context context, JSONObject jsonObject, ViewGroup parent, Class holderClass) {
@@ -154,6 +154,7 @@ public class DynamicView {
             /* add and integer as a universal id  and keep it in a hashmap */
             String id = DynamicHelper.applyStyleProperties(view, properties);
             if (!TextUtils.isEmpty(id)) {
+                /* to target older versions we cannot use View.generateViewId();  */
                 ids.put(id, mCurrentId);
                 view.setId( mCurrentId );
                 mCurrentId++;
