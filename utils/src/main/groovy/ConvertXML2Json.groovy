@@ -99,10 +99,24 @@ Property createProperty (attribute) {
         case "LAYOUT_WEIGHT":
             type = "float";
             break;
+        case "SCALETYPE":
+            value = splitCamelCase(value).replaceAll(" ", "_");
+            break;
     }
 
     return new Property( name, type, value );
 
+}
+
+String splitCamelCase(String s) {
+   return s.replaceAll(
+      String.format("%s|%s|%s",
+         "(?<=[A-Z])(?=[A-Z][a-z])",
+         "(?<=[^A-Z])(?=[A-Z])",
+         "(?<=[A-Za-z])(?=[^A-Za-z])"
+      ),
+      " "
+   );
 }
 
 @groovy.transform.Canonical
