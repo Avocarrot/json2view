@@ -372,13 +372,14 @@ public class DynamicHelper {
         ViewGroup.LayoutParams params = null;
         if (viewGroup!=null) {
             try {
-            /* find parent viewGroup and create LayoutParams of that class */
-                String layoutParamsClassname = viewGroup.getClass().getName() + "$LayoutParams";
-                if (viewGroup instanceof AbsListView) {
-                    layoutParamsClassname = AbsListView.LayoutParams.class.getName();
+                /* find parent viewGroup and create LayoutParams of that class */
+                Class layoutClass = viewGroup.getClass();
+                while (!classExists(layoutClass.getName() + "$LayoutParams")) {
+                    layoutClass = layoutClass.getSuperclass();
                 }
+                String layoutParamsClassname = layoutClass.getName() + "$LayoutParams";
                 Class layoutParamsClass = Class.forName(layoutParamsClassname);
-            /* create the actual layoutParams object */
+                /* create the actual layoutParams object */
                 params = (ViewGroup.LayoutParams) layoutParamsClass.getConstructor(Integer.TYPE, Integer.TYPE).newInstance(new Object[]{ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT});
             } catch (Exception e) {
                 e.printStackTrace();
@@ -940,6 +941,15 @@ public class DynamicHelper {
         } else {
             return json.get(name);
 
+        }
+    }
+
+    public static boolean classExists(String className) {
+        try {
+            Class.forName(className);
+            return true;
+        } catch(ClassNotFoundException ex) {
+            return false;
         }
     }
 
