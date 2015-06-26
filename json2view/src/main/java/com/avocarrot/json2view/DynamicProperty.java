@@ -111,6 +111,7 @@ public class DynamicProperty {
         LAYOUT_WEIGHT,
         ORIENTATION,
 
+        TAG,
         FUNCTION
     }
 

@@ -228,4 +228,13 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
         assertEquals(((TextView)view).getMaxLines(), 3);
     }
 
+    public void testTag() {
+        View view = DynamicView.createView(
+            context,
+            dummyJsonObj
+                .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.TAG).setType(TYPE.STRING).setValue("TAG_VALUE").build())
+                .build());
+        assertEquals(view.getTag(), "TAG_VALUE");
+    }
+
 }

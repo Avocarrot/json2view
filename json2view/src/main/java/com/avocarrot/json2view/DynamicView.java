@@ -21,6 +21,7 @@ import java.util.List;
 public class DynamicView {
 
     static int mCurrentId = 13;
+    static int INTERNAL_TAG_ID = R.id.json2view_internal_tag;
 
     /**
      * @param jsonObject : json object
@@ -49,8 +50,8 @@ public class DynamicView {
         if (container==null)
             return null;
 
-        if (container.getTag() != null)
-            DynamicHelper.applyLayoutProperties(container, (List<DynamicProperty>) container.getTag(), parent, ids);
+        if (container.getTag(INTERNAL_TAG_ID) != null)
+            DynamicHelper.applyLayoutProperties(container, (List<DynamicProperty>) container.getTag(INTERNAL_TAG_ID), parent, ids);
 
         /* clear tag from properties */
         container.setTag(null);
@@ -149,7 +150,7 @@ public class DynamicView {
             }
 
             /* keep properties obj as a tag */
-            view.setTag(properties);
+            view.setTag(INTERNAL_TAG_ID, properties);
 
             /* add and integer as a universal id  and keep it in a hashmap */
             String id = DynamicHelper.applyStyleProperties(view, properties);
@@ -179,9 +180,9 @@ public class DynamicView {
                 /* after create all the children apply layout properties
                 * we need to do this after al children creation to have create all possible ids */
                 for(View v : views) {
-                    DynamicHelper.applyLayoutProperties(v, (List<DynamicProperty>) v.getTag(), viewGroup, ids);
+                    DynamicHelper.applyLayoutProperties(v, (List<DynamicProperty>) v.getTag(INTERNAL_TAG_ID), viewGroup, ids);
                     /* clear tag from properties */
-                    v.setTag(null);
+                    v.setTag(INTERNAL_TAG_ID, null);
                 }
             }
 

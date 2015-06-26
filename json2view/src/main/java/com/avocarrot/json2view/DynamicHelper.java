@@ -156,6 +156,10 @@ public class DynamicHelper {
                     applyScaleY(view, dynProp);
                 }
                 break;
+                case TAG: {
+                    applyTag(view, dynProp);
+                }
+                break;
                 case FUNCTION: {
                     applyFunction(view, dynProp);
                 }
@@ -759,6 +763,12 @@ public class DynamicHelper {
         }
     }
 
+    /**
+     * add string as tag
+     */
+    public static void applyTag(View view, DynamicProperty property) {
+        view.setTag(property.getValueString());
+    }
 
 
     /**
