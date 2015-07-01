@@ -21,7 +21,7 @@ import java.util.List;
 public class DynamicView {
 
     static int mCurrentId = 13;
-    static int INTERNAL_TAG_ID = R.id.json2view_internal_tag;
+    static int INTERNAL_TAG_ID = 0x7f020000;
 
     /**
      * @param jsonObject : json object
