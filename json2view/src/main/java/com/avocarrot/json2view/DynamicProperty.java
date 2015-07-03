@@ -109,6 +109,7 @@ public class DynamicProperty {
         LAYOUT_TOSTARTOF,
         LAYOUT_GRAVITY,
         LAYOUT_WEIGHT,
+        SUM_WEIGHT,
         ORIENTATION,
 
         TAG,

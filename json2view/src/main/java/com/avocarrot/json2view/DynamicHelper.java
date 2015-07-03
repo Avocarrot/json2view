@@ -104,6 +104,10 @@ public class DynamicHelper {
                     applyOrientation(view, dynProp);
                 }
                 break;
+                case SUM_WEIGHT: {
+                    applyWeightSum(view, dynProp);
+                }
+                break;
                 case GRAVITY: {
                     applyGravity(view, dynProp);
                 }
@@ -760,6 +764,15 @@ public class DynamicHelper {
                 }
                 break;
             }
+        }
+    }
+
+    /**
+     * apply WeightSum property in LinearLayout
+     */
+    public static void applyWeightSum(View view, DynamicProperty property) {
+        if ((view instanceof LinearLayout) && (property.type == DynamicProperty.TYPE.FLOAT)) {
+            ((LinearLayout) view).setWeightSum(property.getValueFloat());
         }
     }
 
