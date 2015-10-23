@@ -54,7 +54,7 @@ public class DynamicView {
             DynamicHelper.applyLayoutProperties(container, (List<DynamicProperty>) container.getTag(INTERNAL_TAG_ID), parent, ids);
 
         /* clear tag from properties */
-        container.setTag(null);
+        container.setTag(INTERNAL_TAG_ID, null);
 
         if (holderClass!= null) {
 
