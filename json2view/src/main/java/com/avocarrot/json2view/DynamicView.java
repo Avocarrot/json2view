@@ -167,7 +167,7 @@ public class DynamicView {
 
                 /* parse the aray to get the children views */
                 List<View> views = new ArrayList<>();
-                JSONArray jViews = jsonObject.getJSONArray("views");
+                JSONArray jViews = jsonObject.optJSONArray("views");
                 if (jViews != null) {
                     int count=jViews.length();
                     for (int i=0;i<count;i++) {
