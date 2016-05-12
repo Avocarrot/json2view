@@ -173,8 +173,10 @@ public class DynamicView {
                     for (int i=0;i<count;i++) {
                         /* create every child add it in viewGroup and set its tag with its properties */
                         View dynamicChildView = DynamicView.createViewInternal(context, jViews.getJSONObject(i), parent, ids);
-                        views.add(dynamicChildView);
-                        viewGroup.addView(dynamicChildView);
+                        if (dynamicChildView!=null) {
+                            views.add(dynamicChildView);
+                            viewGroup.addView(dynamicChildView);
+                        }
                     }
                 }
                 /* after create all the children apply layout properties
