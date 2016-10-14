@@ -27,11 +27,16 @@ android:
     - sys-img-armeabi-v7a-android-21
 #    - sys-img-x86-android-21
 
+  licenses:
+    - android-sdk-license-.+
+    - android-sdk-license-c81a61d9
+
 notifications:
   email: false
 
     # Emulator Management: Create, Start and Wait
 before_script:
+    - echo "y" | android update sdk --no-ui
     - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
     - emulator -avd test -no-skin -no-audio -no-window &
     - android-wait-for-emulator
