@@ -8,7 +8,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -168,10 +168,21 @@ public class DynamicHelper {
                     applyFunction(view, dynProp);
                 }
                 break;
+                case NUMCOLUMNS:{
+                    applyNumColumns(view, dynProp);
+                }
+                break;
+                case VISIBILITY:{
+                    applyVisibility(view, dynProp);
+                }
+                break;
             }
         }
         return id;
     }
+
+
+
 
     /**
      * apply dynamic properties for layout in view
@@ -563,6 +574,34 @@ public class DynamicHelper {
         }
     }
 
+    /**
+     * apply visibility in view
+     */
+    private static void applyVisibility(View view, DynamicProperty property) {
+        if (view != null) {
+            switch (property.type) {
+                case STRING: {
+                    switch (property.getValueString()){
+                        case "gone":{
+                            view.setVisibility(View.GONE);
+                        }
+                        break;
+                        case "visible":{
+                            view.setVisibility(View.VISIBLE);
+                        }
+                        break;
+                        case "invisible":{
+                            view.setVisibility(View.INVISIBLE);
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+
     /*** TextView Properties ***/
 
     /**
@@ -851,6 +890,26 @@ public class DynamicHelper {
 
     }
 
+
+    /*** GridView Properties ***/
+
+    /**
+     * apply NumColumns for GridView
+     */
+    private static void applyNumColumns(View view, DynamicProperty property) {
+        if (view != null) {
+            switch (property.type) {
+                case INTEGER: {
+                    ((GridView) view).setNumColumns(property.getValueInt());
+                }
+                break;
+                case STRING: {
+                    ((GridView) view).setNumColumns(Integer.valueOf(property.getValueString()));
+                }
+                break;
+            }
+        }
+    }
 
 
     /**
