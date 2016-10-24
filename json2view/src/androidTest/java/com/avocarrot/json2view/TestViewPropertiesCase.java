@@ -217,7 +217,11 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
                 dummyJsonObj
                         .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.BACKGROUND).setType(TYPE.REF).setValue("@drawable/sample").build())
                         .build());
-        assertEquals( view.getBackground().getConstantState(), context.getResources().getDrawable(com.avocarrot.json2view.test.R.drawable.sample).getConstantState());
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            assertEquals(view.getBackground().getConstantState(), context.getResources().getDrawable(com.avocarrot.json2view.test.R.drawable.sample).getConstantState());
+        } else {
+            assertEquals(view.getBackground().getConstantState(), context.getDrawable(com.avocarrot.json2view.test.R.drawable.sample).getConstantState());
+        }
     }
 
     /* test TextView ellipsize property */
