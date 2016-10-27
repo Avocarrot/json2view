@@ -3,6 +3,7 @@ package com.avocarrot.json2view;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.test.InstrumentationTestCase;
 import android.text.TextUtils;
@@ -41,6 +42,30 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             dummyJsonObj
                 .build());
         assertNotNull("Cannot create dynamic View", view);
+    }
+
+    /* test set visibility */
+    public void testVisibility() {
+        View view = DynamicView.createView(
+                context,
+                dummyJsonObj
+                        .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.VISIBILITY).setType(TYPE.STRING).setValue("gone").build())
+                        .build());
+        assertEquals(view.getVisibility(), View.GONE);
+
+        view = DynamicView.createView(
+                context,
+                dummyJsonObj
+                        .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.VISIBILITY).setType(TYPE.STRING).setValue("visible").build())
+                        .build());
+        assertEquals(view.getVisibility(), View.VISIBLE);
+
+        view = DynamicView.createView(
+                context,
+                dummyJsonObj
+                        .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.VISIBILITY).setType(TYPE.STRING).setValue("invisible").build())
+                        .build());
+        assertEquals(view.getVisibility(), View.INVISIBLE);
     }
 
     /* test set padding as integer */
@@ -186,6 +211,17 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.BACKGROUND).setType(TYPE.COLOR).setValue("0xFF00FF00").build())
                 .build());
         assertEquals( ((ColorDrawable)view.getBackground()).getColor(), 0xFF00FF00);
+
+        view = DynamicView.createView(
+                context,
+                dummyJsonObj
+                        .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.BACKGROUND).setType(TYPE.REF).setValue("@drawable/sample").build())
+                        .build());
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            assertEquals(view.getBackground().getConstantState(), context.getResources().getDrawable(com.avocarrot.json2view.test.R.drawable.sample).getConstantState());
+        } else {
+            assertEquals(view.getBackground().getConstantState(), context.getDrawable(com.avocarrot.json2view.test.R.drawable.sample).getConstantState());
+        }
     }
 
     /* test TextView ellipsize property */

@@ -67,6 +67,7 @@ public class DynamicProperty {
         SCALEY,
         MINWIDTH,
         MINHEIGTH,
+        VISIBILITY,
         /* textView */
         TEXT,
         TEXTCOLOR,
@@ -111,6 +112,8 @@ public class DynamicProperty {
         LAYOUT_WEIGHT,
         SUM_WEIGHT,
         ORIENTATION,
+        /* GridView */
+        NUMCOLUMNS,
 
         TAG,
         FUNCTION

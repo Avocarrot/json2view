@@ -21,7 +21,11 @@ android {
     }
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     androidTestCompile 'junit:junit:4.12'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
 }
