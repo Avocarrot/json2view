@@ -64,6 +64,12 @@ Property createProperty (attribute) {
             } catch (Exception e) {}
             break;
         case "BACKGROUND":
+            if (value.contains("@")) {
+                type = "ref";
+            } else {
+                type = "color";
+            }
+            break;
         case "TEXTCOLOR":
             type = "color";
             break;
