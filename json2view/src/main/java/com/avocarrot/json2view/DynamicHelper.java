@@ -168,6 +168,10 @@ public class DynamicHelper {
                     applyFunction(view, dynProp);
                 }
                 break;
+                case VISIBILITY:{
+                    applyVisibility(view, dynProp);
+                }
+                break;
             }
         }
         return id;
@@ -557,6 +561,33 @@ public class DynamicHelper {
             switch (property.type) {
                 case BOOLEAN: {
                     view.setScaleY(property.getValueFloat());
+                }
+                break;
+            }
+        }
+    }
+
+    /**
+     *  apply visibility in view
+     */
+    private static void applyVisibility(View view, DynamicProperty property) {
+        if (view != null) {
+            switch (property.type) {
+                case STRING: {
+                    switch (property.getValueString()){
+                        case "gone":{
+                            view.setVisibility(View.GONE);
+                        }
+                        break;
+                        case "visible":{
+                            view.setVisibility(View.VISIBLE);
+                        }
+                        break;
+                        case "invisible":{
+                            view.setVisibility(View.INVISIBLE);
+                        }
+                        break;
+                    }
                 }
                 break;
             }
