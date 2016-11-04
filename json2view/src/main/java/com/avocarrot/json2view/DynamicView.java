@@ -22,6 +22,7 @@ public class DynamicView {
 
     static int mCurrentId = 13;
     static int INTERNAL_TAG_ID = 0x7f020000;
+    private static HashMap<String, Integer> idMap = new HashMap<>();;
 
     /**
      * @param jsonObject : json object
@@ -73,9 +74,13 @@ public class DynamicView {
             }
 
         }
-
+        idMap = (HashMap<String, Integer>) ids.clone();
         return container;
 
+    }
+
+    public static HashMap<String, Integer> getIdMap(){
+        return idMap;
     }
 
     /**

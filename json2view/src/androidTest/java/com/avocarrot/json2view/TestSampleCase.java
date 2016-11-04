@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 /**
  * Created by avocarrot on 17/12/2014.
  */
@@ -43,6 +45,15 @@ public class TestSampleCase extends InstrumentationTestCase {
         assertEquals(linearLayout.getChildAt(1).getClass(), TextView.class);
         assertEquals(linearLayout.getChildAt(2).getClass(), ImageView.class);
         assertEquals(linearLayout.getChildAt(3).getClass(), TextView.class);
+    }
+
+    public void testIdMap() {
+        HashMap<String, Integer> idMap = DynamicView.getIdMap();
+        assertEquals(4, idMap.size());
+        assertTrue(idMap.containsKey("adCTA"));
+        assertTrue(idMap.containsKey("adClose"));
+        assertTrue(idMap.containsKey("adTitle"));
+        assertTrue(idMap.containsKey("adImage"));
     }
 
 }
