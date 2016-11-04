@@ -111,6 +111,8 @@ public class DynamicProperty {
         LAYOUT_WEIGHT,
         SUM_WEIGHT,
         ORIENTATION,
+        /* GridView */
+        NUMCOLUMNS,
 
         TAG,
         FUNCTION
