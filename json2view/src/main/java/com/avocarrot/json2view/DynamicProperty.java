@@ -67,6 +67,7 @@ public class DynamicProperty {
         SCALEY,
         MINWIDTH,
         MINHEIGTH,
+        VISIBILITY,
         /* textView */
         TEXT,
         TEXTCOLOR,

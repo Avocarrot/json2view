@@ -43,6 +43,30 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
         assertNotNull("Cannot create dynamic View", view);
     }
 
+    /* test set visibility */
+    public void testVisibility() {
+        View view = DynamicView.createView(
+                context,
+                dummyJsonObj
+                        .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.VISIBILITY).setType(TYPE.STRING).setValue("gone").build())
+                        .build());
+        assertEquals(view.getVisibility(), View.GONE);
+
+        view = DynamicView.createView(
+                context,
+                dummyJsonObj
+                        .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.VISIBILITY).setType(TYPE.STRING).setValue("visible").build())
+                        .build());
+        assertEquals(view.getVisibility(), View.VISIBLE);
+
+        view = DynamicView.createView(
+                context,
+                dummyJsonObj
+                        .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.VISIBILITY).setType(TYPE.STRING).setValue("invisible").build())
+                        .build());
+        assertEquals(view.getVisibility(), View.INVISIBLE);
+    }
+    
     /* test set padding as integer */
     public void testPaddingInteger() {
         int padding = 10;
