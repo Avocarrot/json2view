@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class TestSampleCase extends InstrumentationTestCase {
 
     JSONObject jsonObject;
-    View view2test;
+    DynamicView dynamicView;
     Context context;
 
     @Override
@@ -30,14 +30,14 @@ public class TestSampleCase extends InstrumentationTestCase {
         context = getInstrumentation().getContext();
         jsonObject = Utils.readJson("sample.json", context);
         assertNotNull("Cannot parse json", jsonObject);
-        view2test = DynamicView.createView(context, jsonObject);
-        assertNotNull("Cannot create dynamic View", view2test);
+        dynamicView = DynamicView.createView(context, jsonObject);
+        assertNotNull("Cannot create dynamic View", dynamicView.view);
 
     }
 
     public void testView() {
-        assertTrue("Parent View is not Relative Layout", view2test instanceof RelativeLayout);
-        RelativeLayout relative = (RelativeLayout) view2test;
+        assertTrue("Parent View is not Relative Layout", dynamicView.view instanceof RelativeLayout);
+        RelativeLayout relative = (RelativeLayout) dynamicView.view;
         assertTrue("expecting Linear Layout", relative.getChildAt(0) instanceof LinearLayout);
         LinearLayout linearLayout = (LinearLayout) relative.getChildAt(0);
         assertEquals("expecting 4 children", linearLayout.getChildCount(), 4);
@@ -48,7 +48,7 @@ public class TestSampleCase extends InstrumentationTestCase {
     }
 
     public void testIdMap() {
-        HashMap<String, Integer> idMap = DynamicView.getIdMap();
+        HashMap<String, Integer> idMap = dynamicView.ids;
         assertEquals(4, idMap.size());
         assertTrue(idMap.containsKey("adCTA"));
         assertTrue(idMap.containsKey("adClose"));

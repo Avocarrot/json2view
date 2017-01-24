@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         if (jsonObject != null) {
 
             /* create dynamic view and return the view with the holder class attached as tag */
-            View sampleView = DynamicView.createView(this, jsonObject, SampleViewHolder.class);
+            View sampleView = DynamicView.createView(this, jsonObject, SampleViewHolder.class).view;
             /* get the view with id "testClick" and attach the onClickListener */
             ((SampleViewHolder) sampleView.getTag()).clickableView.setOnClickListener(this);
 

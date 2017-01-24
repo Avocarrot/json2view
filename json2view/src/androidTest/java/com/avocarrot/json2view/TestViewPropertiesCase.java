@@ -39,7 +39,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
         View view = DynamicView.createView(
             context,
             dummyJsonObj
-                .build());
+                .build()).view;
         assertNotNull("Cannot create dynamic View", view);
     }
 
@@ -50,7 +50,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.PADDING).setType(TYPE.DIMEN).setValue(padding).build())
-                .build());
+                .build()).view;
         assertEquals(view.getPaddingTop(), padding);
         assertEquals(view.getPaddingBottom(), padding);
         assertEquals(view.getPaddingLeft(), padding);
@@ -65,7 +65,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.PADDING).setType(TYPE.DIMEN).setValue(padding + "dp").build())
-                .build());
+                .build()).view;
         assertEquals(view.getPaddingTop(), paddindDP);
         assertEquals(view.getPaddingBottom(), paddindDP);
         assertEquals(view.getPaddingLeft(), paddindDP);
@@ -82,7 +82,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.PADDING_TOP).setType(TYPE.DIMEN).setValue(6).build())
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.PADDING_RIGHT).setType(TYPE.DIMEN).setValue(8).build())
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.PADDING_BOTTOM).setType(TYPE.DIMEN).setValue(10).build())
-                .build());
+                .build()).view;
         assertEquals(view.getPaddingLeft(), 4);
         assertEquals(view.getPaddingTop(), 6);
         assertEquals(view.getPaddingRight(), 8);
@@ -96,7 +96,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.PADDING).setType(TYPE.DIMEN).setValue(2).build())
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.PADDING_BOTTOM).setType(TYPE.DIMEN).setValue(10).build())
-                .build());
+                .build()).view;
         assertEquals(view.getPaddingLeft(), 2);
         assertEquals(view.getPaddingTop(), 2);
         assertEquals(view.getPaddingRight(), 2);
@@ -110,7 +110,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.MINWIDTH).setType(TYPE.DIMEN).setValue(250).build())
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.MINHEIGTH).setType(TYPE.DIMEN).setValue(100).build())
-                .build());
+                .build()).view;
         try {
             runTestOnUiThread(new Runnable() {
                 @Override
@@ -128,7 +128,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.TEXTCOLOR).setType(TYPE.COLOR).setValue("0xFF123456").build())
-                .build());
+                .build()).view;
         assertEquals( ((TextView)view).getCurrentTextColor(), 0xFF123456);
     }
 
@@ -138,13 +138,13 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.TEXT).setType(TYPE.STRING).setValue("TEXT VALUE :)").build())
-                .build());
+                .build()).view;
         assertEquals( ((TextView)view).getText(), "TEXT VALUE :)");
         view = DynamicView.createView(
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.TEXT).setType(TYPE.REF).setValue("test_string").build())
-                .build());
+                .build()).view;
         assertEquals( ((TextView)view).getText(), context.getString(com.avocarrot.json2view.test.R.string.test_string));
     }
 
@@ -154,13 +154,13 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.TEXTSIZE).setType(TYPE.DIMEN).setValue("12.5dp").build())
-                .build());
+                .build()).view;
         assertEquals( ((TextView)view).getTextSize(), DynamicHelper.dpToPx(12.5f) );
         view = DynamicView.createView(
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.TEXTSIZE).setType(TYPE.DIMEN).setValue("14.2sp").build())
-                .build());
+                .build()).view;
         assertEquals(((TextView)view).getTextSize(), DynamicHelper.spToPx(14.2f));
     }
 
@@ -170,21 +170,21 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.BACKGROUND).setType(TYPE.COLOR).setValue("red").build())
-                .build());
+                .build()).view;
         assertEquals(((ColorDrawable)view.getBackground()).getColor(), 0xFFFF0000);
 
         view = DynamicView.createView(
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.BACKGROUND).setType(TYPE.COLOR).setValue("#ff00FF").build())
-                .build());
+                .build()).view;
         assertEquals( ((ColorDrawable)view.getBackground()).getColor(), 0xFFFF00FF);
 
         view = DynamicView.createView(
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.BACKGROUND).setType(TYPE.COLOR).setValue("0xFF00FF00").build())
-                .build());
+                .build()).view;
         assertEquals( ((ColorDrawable)view.getBackground()).getColor(), 0xFF00FF00);
     }
 
@@ -194,7 +194,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.ELLIPSIZE).setType(TYPE.STRING).setValue(TextUtils.TruncateAt.MIDDLE.toString()).build())
-                .build());
+                .build()).view;
         assertEquals(((TextView)view).getEllipsize(), TextUtils.TruncateAt.MIDDLE);
     }
 
@@ -204,14 +204,14 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.GRAVITY).setType(TYPE.INTEGER).setValue(17).build())
-                .build());
+                .build()).view;
         assertEquals(((TextView)view).getGravity(), 17);
 
         view = DynamicView.createView(
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.GRAVITY).setType(TYPE.STRING).setValue("CENTER").build())
-                .build());
+                .build()).view;
         assertEquals(((TextView)view).getGravity(), Gravity.CENTER);
     }
 
@@ -224,7 +224,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.MAXLINES).setType(TYPE.INTEGER).setValue(3).build())
-                .build());
+                .build()).view;
         assertEquals(((TextView)view).getMaxLines(), 3);
     }
 
@@ -233,7 +233,7 @@ public class TestViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.TAG).setType(TYPE.STRING).setValue("TAG_VALUE").build())
-                .build());
+                .build()).view;
         assertEquals(view.getTag(), "TAG_VALUE");
     }
 
