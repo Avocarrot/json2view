@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -164,6 +165,10 @@ public class DynamicHelper {
                     applyTag(view, dynProp);
                 }
                 break;
+                case NUMCOLUMNS:{
+                    applyNumColumns(view, dynProp);
+                }
+                break;
                 case FUNCTION: {
                     applyFunction(view, dynProp);
                 }
@@ -176,6 +181,8 @@ public class DynamicHelper {
         }
         return id;
     }
+
+
 
     /**
      * apply dynamic properties for layout in view
@@ -882,6 +889,24 @@ public class DynamicHelper {
 
     }
 
+    /*** GridView Properties ***/
+    /**
+    * apply NumColumns for GridView
+    */
+    private static void applyNumColumns(View view, DynamicProperty property) {
+        if (view instanceof GridView) {
+            switch (property.type) {
+                case INTEGER: {
+                    ((GridView) view).setNumColumns(property.getValueInt());
+                }
+                break;
+                case STRING: {
+                    ((GridView) view).setNumColumns(Integer.valueOf(property.getValueString()));
+                }
+                break;
+            }
+        }
+    }
 
 
     /**
