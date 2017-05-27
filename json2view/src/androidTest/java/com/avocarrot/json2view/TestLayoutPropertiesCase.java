@@ -143,11 +143,11 @@ public class TestLayoutPropertiesCase extends ActivityInstrumentationTestCase2<T
 
         /* create View */
         final View toReturn =
-            DynamicView.createView(
+                DynamicView.createView(
                 context,
                 dvjb.build(),
                 Holder.class
-            );
+            ).view;
         /* add it in the activity to apply layout*/
         activity.runOnUiThread(new Runnable() {
             @Override

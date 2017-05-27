@@ -35,7 +35,7 @@ public class TestImageViewPropertiesCase extends InstrumentationTestCase {
         View view = DynamicView.createView(
             context,
             dummyJsonObj
-                .build());
+                .build()).view;
         assertNotNull("Cannot create dynamic View", view);
     }
 
@@ -45,14 +45,14 @@ public class TestImageViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.SRC).setType(TYPE.REF).setValue("sample").build())
-                .build());
+                .build()).view;
         assertTrue( ( ((BitmapDrawable)((ImageView)view).getDrawable()).getBitmap() ).sameAs(Utils.readDrawable(com.avocarrot.json2view.test.R.drawable.sample, context)));
         /* load other drawable and check */
         view = DynamicView.createView(
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.SRC).setType(TYPE.REF).setValue("sample").build())
-                .build());
+                .build()).view;
         assertFalse( ( ((BitmapDrawable)((ImageView)view).getDrawable()).getBitmap() ).sameAs(Utils.readAssetAsImage("sample2.png", context)));
     }
 
@@ -62,7 +62,7 @@ public class TestImageViewPropertiesCase extends InstrumentationTestCase {
             context,
             dummyJsonObj
                 .addProperty(new DynamicPropertyJsonBuilder().setName(NAME.SRC).setType(TYPE.BASE64).setValue(Utils.readBase64("sample2.png", context)).build())
-                .build());
+                .build()).view;
         assertTrue( ( ((BitmapDrawable)((ImageView)view).getDrawable()).getBitmap() ).sameAs(Utils.readAssetAsImage("sample2.png", context)));
     }
 

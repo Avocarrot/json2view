@@ -25,7 +25,7 @@ public class TestInvalidJson extends InstrumentationTestCase {
 
         jsonObject = Utils.readJson("error.json", context);
         assertNotNull("Cannot parse json", jsonObject);
-        view2test = DynamicView.createView(context, jsonObject);
+        view2test = (DynamicView.createView(context, jsonObject)).view;
         assertNotNull("Cannot create dynamic View", view2test);
 
     }

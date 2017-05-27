@@ -101,8 +101,9 @@ eg. JSON to create a TextView with textSize : 12sp and text : "Hello Avocarrot!"
 {
     "widget": "TextView",
 	"properties": [
-	    {"name":"textSize", "type": "dimen", "value":"13sp"},
-	    {"name":"text", "type": "string", "value":"Hello Avocarrot!"}
+	    {"name":"id", "type":"ref" , "value":"textView_title"},
+	    {"name":"textSize", "type":"dimen", "value":"13sp"},
+	    {"name":"text", "type":"string", "value":"Hello Avocarrot!"}
 	]
 }
 ```
@@ -120,11 +121,31 @@ from the root folder of the project
 
 
 ### Loading dynamic layout
+
+**Example 00** <br />
 create and attach view in the specific Parent (created from xml) <br/>
 ```java
+/* load xml layout */
+setContentView(R.layout.main);
 ViewParent viewParent = (ViewParent) findViewById(R.id.parent_view_id)
 JSONObject jsonObject = ... // load from network, sdcard etc
 View sampleView = DynamicView.createView(this, jsonObject, viewParent);
+```
+
+**Example 01** <br />
+create and attach view in the activity <br />
+```java
+JSONObject jsonObject = ... // load from network, sdcard etc
+View sampleView = DynamicView.createView(this, jsonObject);
+sampleView.setLayoutParams(
+   new WindowManager.LayoutParams(
+      WindowManager.LayoutParams.MATCH_PARENT,
+      WindowManager.LayoutParams.MATCH_PARENT));
+setContentView(sampleView);
+
+HashMap<String, Integer> idMap = DynamicView.getIdMap();
+TextView title = (TextView) findViewById(idMap.get("textView_title").intValue());
+title.setBackgroundColor(Color.GREEN);
 ```
 
 You can check some example use cases in the wiki [here](https://github.com/Avocarrot/json2view/wiki/Creating-Dynamic-Layouts)

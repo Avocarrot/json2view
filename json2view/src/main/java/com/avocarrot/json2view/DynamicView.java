@@ -23,12 +23,21 @@ public class DynamicView {
     static int mCurrentId = 13;
     static int INTERNAL_TAG_ID = 0x7f020000;
 
+    View view = null;
+    HashMap<String, Integer> ids = new HashMap<>();
+
+    private DynamicView(View view, HashMap<String, Integer> ids){
+        this.view = view;
+        this.ids = ids;
+    }
+
+
     /**
      * @param jsonObject : json object
      * @param holderClass : class that will be created as an holder and attached as a tag in the View
-     * @return the view that created
+     * @return the DynamicView object which contains the view and the ids that created
      */
-    public static View createView (Context context, JSONObject jsonObject, Class holderClass) {
+    public static DynamicView createView (Context context, JSONObject jsonObject, Class holderClass) {
         return createView(context, jsonObject, null, holderClass);
     }
 
@@ -36,9 +45,9 @@ public class DynamicView {
      * @param jsonObject : json object
      * @param parent : parent viewGroup
      * @param holderClass : class that will be created as an holder and attached as a tag in the View, If contains HashMap ids will replaced with idsMap
-     * @return the view that created
+     * @return the DynamicView object which contains the view and the ids that created
      */
-    public static View createView (Context context, JSONObject jsonObject, ViewGroup parent, Class holderClass) {
+    public static DynamicView createView (Context context, JSONObject jsonObject, ViewGroup parent, Class holderClass) {
 
         if (jsonObject==null)
             return null;
@@ -74,24 +83,24 @@ public class DynamicView {
 
         }
 
-        return container;
+        return new DynamicView(container, ids);
 
     }
 
     /**
      * @param jsonObject : json object
      * @param parent : parent viewGroup
-     * @return the view that created
+     * @return the DynamicView object which contains the view and the ids that created
      */
-    public static View createView (Context context, JSONObject jsonObject, ViewGroup parent) {
+    public static DynamicView createView (Context context, JSONObject jsonObject, ViewGroup parent) {
         return createView(context, jsonObject, parent, null);
     }
 
     /**
      * @param jsonObject : json object
-     * @return the view that created
+     * @return the DynamicView object which contains the view and the ids that created
      */
-    public static View createView (Context context, JSONObject jsonObject) {
+    public static DynamicView createView (Context context, JSONObject jsonObject) {
         return createView(context, jsonObject, null, null);
     }
 
