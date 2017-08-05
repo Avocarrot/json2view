@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+version '1.0'
+group 'com.avocarrot.json2view'
 
 android {
     compileSdkVersion 25
