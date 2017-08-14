@@ -3,12 +3,16 @@ package com.avocarrot.json2view.sample;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.annotation.UiThread;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.avocarrot.json2view.DynamicView;
 import com.avocarrot.json2view.DynamicViewId;
@@ -22,6 +26,7 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +44,23 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         if (jsonObject != null) {
 
-            /* create dynamic view and return the view with the holder class attached as tag */
-            View sampleView = DynamicView.createView(this, jsonObject, SampleViewHolder.class);
-            /* get the view with id "testClick" and attach the onClickListener */
-            ((SampleViewHolder) sampleView.getTag()).clickableView.setOnClickListener(this);
+            DynamicView.createViewAsync(this, jsonObject, SampleViewHolder.class, new DynamicView.OnJsonParsedAsView() {
+                @Override
+                public void onBackgroundChanges(View view) {
+                    ((SampleViewHolder) view.getTag()).clickableView.setOnClickListener(MainActivity.this);
+                    view.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT));
+                }
 
-            /* add Layout Parameters in just created view and set as the contentView of the activity */
-            sampleView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT));
-            setContentView(sampleView);
+                @Override
+                public void onSuccess(View view) {
+                    setContentView(view);
+                }
+
+                @Override
+                public void onFailure() {
+                    Log.e("Json2View", "View parsing was no possible");
+                }
+            });
 
         } else {
             Log.e("Json2View", "Could not load valid json file");
@@ -97,6 +111,55 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         public View clickableView;
 
         public SampleViewHolder() {
+        }
+    }
+
+    class exa implements Runnable{
+        public Context context;
+        public JSONObject jsonObject;
+        public View.OnClickListener clickListener;
+        View sampleView;
+        LinearLayout linearLayout;
+
+        @Override
+        public void run() {
+            linearLayout = new LinearLayout(context);
+            sampleView = DynamicView.createView(context, jsonObject, SampleViewHolder.class);
+            sampleView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT));
+            linearLayout.addView(sampleView);
+            finished();
+        }
+
+        @UiThread
+        private void finished(){
+            ((SampleViewHolder) sampleView.getTag()).clickableView.setOnClickListener(clickListener);
+            /* add Layout Parameters in just created view and set as the contentView of the activity */
+            //sampleView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT));
+            setContentView(linearLayout);
+        }
+    }
+
+    class exa2 extends AsyncTask<Void, Void, Boolean>{
+        public Context context;
+        public JSONObject jsonObject;
+        public View.OnClickListener clickListener;
+        View sampleView;
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+             /* create dynamic view and return the view with the holder class attached as tag */
+            //LinearLayout linearLayout = new LinearLayout(context);
+            sampleView = DynamicView.createView(context, jsonObject, SampleViewHolder.class);
+            /* get the view with id "testClick" and attach the onClickListener */
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            ((SampleViewHolder) sampleView.getTag()).clickableView.setOnClickListener(clickListener);
+            /* add Layout Parameters in just created view and set as the contentView of the activity */
+            sampleView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT));
+            setContentView(sampleView);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.avocarrot.json2view;
 
 import android.content.Context;
+import android.support.annotation.UiThread;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,38 @@ import java.util.List;
  */
 public class DynamicView {
 
+    public interface OnJsonParsedAsView{
+        void onBackgroundChanges(View parsedView);
+        void onSuccess(View parsedView);
+        void onFailure();
+    }
+
+    static class AsynchronousParser implements Runnable{
+        public Context context;
+        public JSONObject jsonObject;
+        public Class viewHolderClass;
+        public OnJsonParsedAsView onJsonParsedAsView;
+        View sampleView;
+
+        @Override
+        public void run() {
+            sampleView = DynamicView.createView(context, jsonObject, viewHolderClass);
+            if(onJsonParsedAsView != null) onJsonParsedAsView.onBackgroundChanges(sampleView);
+            finished();
+        }
+
+        @UiThread
+        private void finished(){
+            if(onJsonParsedAsView != null){
+                if(sampleView != null){
+                    onJsonParsedAsView.onSuccess(sampleView);
+                }else{
+                    onJsonParsedAsView.onFailure();
+                }
+            }
+        }
+    }
+
     static int mCurrentId = 13;
     static int INTERNAL_TAG_ID = 0x7f020000;
 
@@ -30,6 +63,22 @@ public class DynamicView {
      */
     public static View createView (Context context, JSONObject jsonObject, Class holderClass) {
         return createView(context, jsonObject, null, holderClass);
+    }
+
+    /**
+     * @param jsonObject : json object
+     * @param holderClass : class that will be created as an holder and attached as a tag in the View
+     * @return the view that created
+     */
+    public static void createViewAsync (Context context, JSONObject jsonObject, Class holderClass, OnJsonParsedAsView onJsonParsedAsView) {
+
+        AsynchronousParser parser = new AsynchronousParser();
+        parser.context = context;
+        parser.jsonObject = jsonObject;
+        parser.viewHolderClass = holderClass;
+        parser.onJsonParsedAsView = onJsonParsedAsView;
+
+        ParserExecutor.getExecutor().execute(parser);
     }
 
     /**
