@@ -39,7 +39,7 @@ You can parse any xml through the json2view library to create a JSON that will b
 
 <img alt="how it works schematic" src="https://github.com/Avocarrot/json2view/blob/master/example_assets/how_it_works.png" width="700px"/>
 
-Note: Runtime creation of a view without the precompiled version of xml in apk (res/layout), especially for highly complex layouts, can be a potential latency issue.
+Note: Runtime creation of a view without the precompiled version of xml in apk (res/layout), especially for highly complex layouts, can be a potential latency issue. In order to reduce the workload in the UI thread, use the createViewAsync methods.
 
 ## Examples
 
