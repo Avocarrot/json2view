@@ -1,30 +1,44 @@
 language: android
 jdk: oraclejdk8
+
+cache:
+  directories:
+    - ${TRAVIS_BUILD_DIR}/gradle/caches/
+    - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
+
 env:
   global:
-    - ANDROID_TARGET=android-21
+    - ANDROID_API_LEVEL=26
+    - EMULATOR_API_LEVEL=25
     - ANDROID_ABI=armeabi-v7a
+    - ANDROID_TAG=google_apis
+    - ANDROID_TARGET=android-$ANDROID_API_LEVEL
 android:
   components:
     # Uncomment the lines below if you want to
     # use the latest revision of Android SDK Tools
     - tools
-    - tools
     - platform-tools
     # The BuildTools version used by your project
-    - build-tools-25.0.3
-    # The SDK version used to compile your project
+    - build-tools-27.0.3
     - android-25
-
+    - android-$ANDROID_API_LEVEL
+    - android-$EMULATOR_API_LEVEL
     # Additional components
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
-    - addon-google_apis-google-25
+
+    - addon-google_apis-google-$ANDROID_API_LEVEL
+    - addon-google_apis-google-$EMULATOR_API_LEVEL
 
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+    - sys-img-armeabi-v7a-android-25
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
 
 #  licenses:
 #    - android-sdk-license-.+
@@ -35,8 +49,12 @@ notifications:
 
     # Emulator Management: Create, Start and Wait
 before_script:
-    - echo "y" | android update sdk --no-ui
-    - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-    - emulator -avd test -no-skin -no-audio -no-window &
-    - android-wait-for-emulator
+    - yes | sdkmanager tools
+    - yes | sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
+    - echo no | avdmanager create avd --force -n test -k "system-images;android-25;google_apis;armeabi-v7a"
+    - emulator -avd test -no-window &
+    - sleep 60
     - adb shell input keyevent 82 &
+
+script:
+  - ./gradlew clean json2view:cAT
