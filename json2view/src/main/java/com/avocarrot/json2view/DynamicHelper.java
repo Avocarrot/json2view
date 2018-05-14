@@ -9,9 +9,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -170,6 +174,15 @@ public class DynamicHelper {
                 break;
                 case VISIBILITY:{
                     applyVisibility(view, dynProp);
+                }
+                case CHECKED: {
+                    applyChecked(view, dynProp);
+                }
+                case FOCUSABLE: {
+                    applyFocusable(view, dynProp);
+                }
+                case FOCUSABLE_IN_TOUCH_MODE: {
+                    applyFocusableInTouchMode(view, dynProp);
                 }
                 break;
             }
@@ -463,10 +476,10 @@ public class DynamicHelper {
             switch (property.type) {
                 case DIMEN: {
                     int[] padding = new int[] {
-                      view.getPaddingLeft(),
-                      view.getPaddingTop(),
-                      view.getPaddingRight(),
-                      view.getPaddingBottom()
+                            view.getPaddingLeft(),
+                            view.getPaddingTop(),
+                            view.getPaddingRight(),
+                            view.getPaddingBottom()
                     };
                     padding[position] = property.getValueInt();
                     view.setPadding(padding[0], padding[1], padding[2], padding[3]);
@@ -725,6 +738,38 @@ public class DynamicHelper {
         }
     }
 
+    /**
+     * apply focusable property in editText
+     */
+    private static void applyFocusable(View view, DynamicProperty property) {
+        if (view != null) {
+            if (view instanceof EditText) {
+                switch (property.type) {
+                    case BOOLEAN: {
+                        view.setFocusable(property.getValueBoolean());
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * apply focusableInTouchMode property in editText
+     */
+    private static void applyFocusableInTouchMode(View view, DynamicProperty property) {
+        if (view != null) {
+            if (view instanceof EditText) {
+                switch (property.type) {
+                    case BOOLEAN: {
+                        view.setFocusableInTouchMode(property.getValueBoolean());
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
 
     /*** ImageView Properties ***/
 
@@ -804,6 +849,22 @@ public class DynamicHelper {
     public static void applyWeightSum(View view, DynamicProperty property) {
         if ((view instanceof LinearLayout) && (property.type == DynamicProperty.TYPE.FLOAT)) {
             ((LinearLayout) view).setWeightSum(property.getValueFloat());
+        }
+    }
+
+    /**
+     * apply checked state in compoundButton view
+     */
+    public static void applyChecked(View view, DynamicProperty property) {
+        if (view != null) {
+            if (view instanceof CompoundButton) {
+                switch (property.type) {
+                    case BOOLEAN: {
+                        ((CompoundButton) view).setChecked(property.getValueBoolean());
+                    }
+                    break;
+                }
+            }
         }
     }
 

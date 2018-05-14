@@ -80,6 +80,9 @@ public class DynamicProperty {
         DRAWABLEBOTTOM,
         DRAWABLELEFT,
         DRAWABLERIGHT,
+        /* editText */
+        FOCUSABLE,
+        FOCUSABLE_IN_TOUCH_MODE,
         /* imageView */
         SRC,
         SCALETYPE,
@@ -112,6 +115,8 @@ public class DynamicProperty {
         LAYOUT_WEIGHT,
         SUM_WEIGHT,
         ORIENTATION,
+        /* compoundbutton */
+        CHECKED,
 
         TAG,
         FUNCTION
